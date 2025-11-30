@@ -16,19 +16,12 @@ namespace GSB2.Models
         public int Id_Patients { get; set; }
         public int Id_Users { get; set; }
         public string Name { get; set; }
-        public string Age { get; set; }
+        public int Age { get; set; }
         public string Firstname { get; set; }
         public bool Gender { get; set; }
 
-
-        // ceci est le constructeur, permet d'accédr aux méthode et propriété de notre class
-        public Patients()
-        {
-
-        }
-
         // ceci est une surcharge du constructeur elle permer la création d'un objet user avec les champ passé en param
-        public Patients(int id_patients, int id_users, string name, string age, string firstname, bool gender)
+        public Patients(int id_patients, int id_users, string name, int age, string firstname, bool gender)
         {
             Id_Users = id_users;
             Id_Patients = id_patients;

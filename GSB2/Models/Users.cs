@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace GSB2.Models
 {
@@ -18,26 +20,29 @@ namespace GSB2.Models
 
 
         // ceci est le constructeur, permet d'accédr aux méthode et propriété de notre class
-        public Users()
-        {
+        //public Users()
+        //{
 
-        }
+        //}
 
         // ceci est une surcharge du constructeur elle permer la création d'un objet user avec les champ passé en param
-        public Users(int id_Users, string firstname, string name, string email, string password, bool role)
-        {
-            Id_Users = id_Users;
-            Firstname = firstname;
-            Name = name;
-            Email = email;
-            Password = password;
-            Role = role;
-        }
+        //public Users(int id_Users, string firstname, string name, string email, string password, bool role)
+        //{
+        //    Id_Users = id_Users;
+        //    Firstname = firstname;
+        //    Name = name;
+        //    Email = email;
+        //    Password = password;
+        //    Role = role;
+        //}
 
-        public Users(int id_Users, string name)
+        public Users(int id_Users, string firstname, string name, string email, bool role)
         {
             Id_Users = id_Users;
             Name = name;
+            Firstname = firstname;
+            Email = email;
+            Role = role;
         }
     }
 }

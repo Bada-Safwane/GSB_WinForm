@@ -17,7 +17,6 @@ C:\Users\safwa\Desktop\DEV\GSB2\GSB2\bin\Debug\net8.0-windows\runtimes\win-x64\n
 C:\Users\safwa\Desktop\DEV\GSB2\GSB2\bin\Debug\net8.0-windows\runtimes\win-x64\native\krb5_64.dll
 C:\Users\safwa\Desktop\DEV\GSB2\GSB2\bin\Debug\net8.0-windows\runtimes\win-x64\native\krbcc64.dll
 C:\Users\safwa\Desktop\DEV\GSB2\GSB2\obj\Debug\net8.0-windows\GSB2.csproj.AssemblyReference.cache
-C:\Users\safwa\Desktop\DEV\GSB2\GSB2\obj\Debug\net8.0-windows\GSB2.Form1.resources
 C:\Users\safwa\Desktop\DEV\GSB2\GSB2\obj\Debug\net8.0-windows\GSB2.csproj.GenerateResource.cache
 C:\Users\safwa\Desktop\DEV\GSB2\GSB2\obj\Debug\net8.0-windows\GSB2.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\safwa\Desktop\DEV\GSB2\GSB2\obj\Debug\net8.0-windows\GSB2.AssemblyInfoInputs.cache
@@ -29,3 +28,8 @@ C:\Users\safwa\Desktop\DEV\GSB2\GSB2\obj\Debug\net8.0-windows\refint\GSB2.dll
 C:\Users\safwa\Desktop\DEV\GSB2\GSB2\obj\Debug\net8.0-windows\GSB2.pdb
 C:\Users\safwa\Desktop\DEV\GSB2\GSB2\obj\Debug\net8.0-windows\GSB2.genruntimeconfig.cache
 C:\Users\safwa\Desktop\DEV\GSB2\GSB2\obj\Debug\net8.0-windows\ref\GSB2.dll
+C:\Users\safwa\Desktop\DEV\GSB2\GSB2\obj\Debug\net8.0-windows\GSB2.sourcelink.json
+C:\Users\safwa\Desktop\DEV\GSB2\GSB2\obj\Debug\net8.0-windows\GSB2.ConnexionForm.resources
+C:\Users\safwa\Desktop\DEV\GSB2\GSB2\obj\Debug\net8.0-windows\GSB2.Forms.RegisterForm.resources
+C:\Users\safwa\Desktop\DEV\GSB2\GSB2\obj\Debug\net8.0-windows\GSB2.Forms.MainForm.resources
+C:\Users\safwa\Desktop\DEV\GSB2\GSB2\obj\Debug\net8.0-windows\gsbMonolith.Forms.MainForm.resources

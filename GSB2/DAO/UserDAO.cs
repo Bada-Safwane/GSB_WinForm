@@ -23,7 +23,8 @@ namespace GSB2.DAO
                     connection.Open();
 
                     MySqlCommand cmd = new MySqlCommand(
-                    @"SELECT id_users, firstname, name, email, role 
+                    @"SELECT id_users, 
+                      firstname, name, email, role 
                       FROM users 
                       WHERE email = @email AND password = SHA2(@password, 256);",
                     connection);
@@ -141,7 +142,7 @@ namespace GSB2.DAO
                 try
                 {
                     connection.Open();
-                    string query = "SELECT id_user, name, firstname, email, role FROM users;";
+                    string query = "SELECT id_users, name, firstname, email, role FROM users;";
 
                     using (var cmd = new MySqlCommand(query, connection))
                     using (var reader = cmd.ExecuteReader())
@@ -149,7 +150,7 @@ namespace GSB2.DAO
                         while (reader.Read())
                         {
                             users.Add(new Users(
-                                reader.GetInt32("id_user"),
+                                reader.GetInt32("id_users"),
                                 reader.GetString("firstname"),
                                 reader.GetString("name"),
                                 reader.GetString("email"),
@@ -181,7 +182,7 @@ namespace GSB2.DAO
 
                     string query = @"UPDATE users
                         SET name = @Name, firstname = @Firstname, email = @Email, role = @Role
-                        WHERE id_user = @Id;";
+                        WHERE id_users = @Id;";
 
                     using (var cmd = new MySqlCommand(query, connection))
                     {
@@ -213,7 +214,7 @@ namespace GSB2.DAO
                 try
                 {
                     connection.Open();
-                    string query = "DELETE FROM users WHERE id_user = @Id;";
+                    string query = "DELETE FROM users WHERE id_users = @Id;";
 
                     using (var cmd = new MySqlCommand(query, connection))
                     {

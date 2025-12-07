@@ -24,7 +24,7 @@ namespace GSB2.DAO
                     connection.Open();
 
                     MySqlCommand cmd = new MySqlCommand(
-                        @"SELECT id_prescription, id_medicine, quantity FROM LiaiMP;", connection);
+                        @"SELECT id_prescription, id_medicine, quantity FROM liai_medicine_prescription;", connection);
 
                     using var reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -59,7 +59,7 @@ namespace GSB2.DAO
 
                     MySqlCommand cmd = new MySqlCommand(
                         @"SELECT id_prescription, id_medicine, quantity 
-                          FROM LiaiMP 
+                          FROM liai_medicine_prescription 
                           WHERE id_prescription = @id_prescription;", connection);
 
                     cmd.Parameters.AddWithValue("@id_prescription", id_prescription);
@@ -97,7 +97,7 @@ namespace GSB2.DAO
 
                     MySqlCommand cmd = new MySqlCommand(
                         @"SELECT id_prescription, id_medicine, quantity 
-                          FROM LiaiMP 
+                          FROM liai_medicine_prescription 
                           WHERE id_medicine = @id_medicine;", connection);
 
                     cmd.Parameters.AddWithValue("@id_medicine", id_medicine);
@@ -132,7 +132,7 @@ namespace GSB2.DAO
                     connection.Open();
 
                     MySqlCommand cmd = new MySqlCommand(@"
-                        INSERT INTO LiaiMP (id_prescription, id_medicine, quantity)
+                        INSERT INTO liai_medicine_prescription (id_prescription, id_medicine, quantity)
                         VALUES (@id_prescription, @id_medicine, @quantity);
                     ", connection);
 
@@ -161,7 +161,7 @@ namespace GSB2.DAO
                     connection.Open();
 
                     MySqlCommand cmd = new MySqlCommand(@"
-                        DELETE FROM LiaiMP
+                        DELETE FROM liai_medicine_prescription
                         WHERE id_prescription = @id_prescription AND id_medicine = @id_medicine;
                     ", connection);
 
@@ -189,7 +189,7 @@ namespace GSB2.DAO
                     connection.Open();
 
                     MySqlCommand cmd = new MySqlCommand(@"
-                        DELETE FROM LiaiMP WHERE id_prescription = @id_prescription;
+                        DELETE FROM liai_medicine_prescription WHERE id_prescription = @id_prescription;
                     ", connection);
 
                     cmd.Parameters.AddWithValue("@id_prescription", id_prescription);

@@ -36,7 +36,8 @@ namespace GSB2.Models
         //    Role = role;
         //}
 
-        public Users(int id_Users, string firstname, string name, string email, bool role)
+        public Users(int id_Users, 
+            string firstname, string name, string email, bool role)
         {
             Id_Users = id_Users;
             Name = name;

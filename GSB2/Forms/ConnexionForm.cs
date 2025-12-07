@@ -39,9 +39,9 @@ namespace GSB2
 
             if (user != null)
             {
-                MessageBox.Show(user.ToString());
+                //MessageBox.Show(user.ToString());
 
-                MainForm newForm = new MainForm();
+                MainForm newForm = new MainForm(user);
 
                 // Show the new form
                 newForm.Show();
@@ -65,5 +65,6 @@ namespace GSB2
             // Close the current form
             this.Hide();
         }
+
     }
 }

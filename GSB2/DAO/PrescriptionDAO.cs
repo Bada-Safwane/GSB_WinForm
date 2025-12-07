@@ -52,9 +52,9 @@ namespace GSB2.DAO
             {
                 connection.Open();
                 MySqlCommand cmd = new MySqlCommand(
-                    @"INSERT INTO Prescription (id_user, id_patient, validity)
-                      VALUES (@id_user, @id_patient, @validity);", connection);
-                cmd.Parameters.AddWithValue("@id_user", prescription.Id_users);
+                    @"INSERT INTO Prescription (id_users, id_patient, validity)
+                      VALUES (@id_users, @id_patient, @validity);", connection);
+                cmd.Parameters.AddWithValue("@id_users", prescription.Id_users);
                 cmd.Parameters.AddWithValue("@id_patient", prescription.Id_patients);
                 cmd.Parameters.AddWithValue("@validity", prescription.Validity);
 
@@ -79,9 +79,9 @@ namespace GSB2.DAO
                 transaction = connection.BeginTransaction();
 
                 MySqlCommand cmd = new MySqlCommand(
-                    @"INSERT INTO Prescription (id_user, id_patient, validity)
-                      VALUES (@id_user, @id_patient, @validity);", connection, transaction);
-                cmd.Parameters.AddWithValue("@id_user", prescription.Id_users);
+                    @"INSERT INTO Prescription (id_users, id_patient, validity)
+                      VALUES (@id_users, @id_patient, @validity);", connection, transaction);
+                cmd.Parameters.AddWithValue("@id_users", prescription.Id_users);
                 cmd.Parameters.AddWithValue("@id_patient", prescription.Id_patients);
                 cmd.Parameters.AddWithValue("@validity", prescription.Validity);
                 cmd.ExecuteNonQuery();
@@ -90,7 +90,7 @@ namespace GSB2.DAO
                 foreach (var med in medicines)
                 {
                     MySqlCommand medCmd = new MySqlCommand(
-                        @"INSERT INTO Appartient (id_prescription, id_medicine, quantity)
+                        @"INSERT INTO liai_medicine_prescription (id_prescription, id_medicine, quantity)
                           VALUES (@id_prescription, @id_medicine, @quantity);", connection, transaction);
                     medCmd.Parameters.AddWithValue("@id_prescription", newPrescriptionId);
                     medCmd.Parameters.AddWithValue("@id_medicine", med.Id_medicine);
@@ -122,11 +122,11 @@ namespace GSB2.DAO
                         p.id_prescription, p.validity,
                         u.firstname AS doctor_firstname, u.name AS doctor_name,
                         pa.firstname AS patient_firstname, pa.name AS patient_name, pa.age AS patient_age,
-                        GROUP_CONCAT(CONCAT(m.name, ' (', a.quantity, ')') SEPARATOR ', ') AS medicines
+                        GROUP_CONCAT(CONCAT(m.names, ' (', a.quantity, ')') SEPARATOR ', ') AS medicines
                     FROM Prescription p
-                    INNER JOIN Users u ON p.id_user = u.id_user
-                    INNER JOIN Patients pa ON p.id_patient = pa.id_patient
-                    LEFT JOIN Appartient a ON p.id_prescription = a.id_prescription
+                    INNER JOIN Users u ON p.id_users = u.id_users
+                    INNER JOIN Patients pa ON p.id_patients = pa.id_patients
+                    LEFT JOIN liai_medicine_prescription a ON p.id_prescription = a.id_prescrition
                     LEFT JOIN Medicine m ON a.id_medicine = m.id_medicine
                     GROUP BY p.id_prescription, p.validity, u.firstname, u.name, pa.firstname, pa.name, pa.age
                     ORDER BY p.id_prescription ASC;";
@@ -160,7 +160,7 @@ namespace GSB2.DAO
             try
             {
                 connection.Open();
-                string query = @"SELECT id_medicine, quantity FROM Appartient WHERE id_prescription = @id";
+                string query = @"SELECT id_medicine, quantity FROM liai_medicine_prescription WHERE id_prescription = @id";
                 using var cmd = new MySqlCommand(query, connection);
                 cmd.Parameters.AddWithValue("@id", id_prescription);
                 using var reader = cmd.ExecuteReader();
@@ -196,7 +196,7 @@ namespace GSB2.DAO
 
                 // 2️⃣ Supprimer anciennes lignes Appartient
                 MySqlCommand delCmd = new MySqlCommand(
-                    @"DELETE FROM Appartient WHERE id_prescription = @id;", connection, transaction);
+                    @"DELETE FROM liai_medicine_prescription WHERE id_prescription = @id;", connection, transaction);
                 delCmd.Parameters.AddWithValue("@id", id_prescription);
                 delCmd.ExecuteNonQuery();
 
@@ -204,7 +204,7 @@ namespace GSB2.DAO
                 foreach (var med in medicines)
                 {
                     MySqlCommand medCmd = new MySqlCommand(
-                        @"INSERT INTO Appartient (id_prescription, id_medicine, quantity)
+                        @"INSERT INTO liai_medicine_prescription (id_prescription, id_medicine, quantity)
                           VALUES (@id_prescription, @id_medicine, @quantity);", connection, transaction);
                     medCmd.Parameters.AddWithValue("@id_prescription", id_prescription);
                     medCmd.Parameters.AddWithValue("@id_medicine", med.Id_medicine);
@@ -236,7 +236,7 @@ namespace GSB2.DAO
 
                 // 1️⃣ Supprimer lignes Appartient
                 MySqlCommand delAppCmd = new MySqlCommand(
-                    @"DELETE FROM Appartient WHERE id_prescription = @id;", connection, transaction);
+                    @"DELETE FROM liai_medicine_prescription WHERE id_prescription = @id;", connection, transaction);
                 delAppCmd.Parameters.AddWithValue("@id", id_prescription);
                 delAppCmd.ExecuteNonQuery();
 

@@ -53,6 +53,14 @@
             "MySql.Data": {
               "target": "Package",
               "version": "[9.5.0, )"
+            },
+            "itext": {
+              "target": "Package",
+              "version": "[9.4.0, )"
+            },
+            "itext.bouncy-castle-adapter": {
+              "target": "Package",
+              "version": "[9.4.0, )"
             }
           },
           "imports": [

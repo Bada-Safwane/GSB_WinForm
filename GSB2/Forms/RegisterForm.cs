@@ -45,7 +45,7 @@ namespace GSB2.Forms
                     "Inscription réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 this.Hide();
-                new MainForm().Show();
+                new ConnexionForm().Show();
             }
         }
 

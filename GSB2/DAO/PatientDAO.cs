@@ -21,21 +21,21 @@ namespace GSB2.DAO
                 {
                     connection.Open();
 
-                    string query = "SELECT * FROM Patients WHERE id_patient = @id_patient;";
+                    string query = "SELECT * FROM Patients WHERE id_patients = @id_patients;";
                     MySqlCommand cmd = new MySqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@id_patient", id_patient);
+                    cmd.Parameters.AddWithValue("@id_patients", id_patient);
 
                     using (var reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
                             return new Patients(
-                                reader.GetInt32("id_patient"),
-                                reader.GetInt32("id_user"),
+                                reader.GetInt32("id_patients"),
+                                reader.GetInt32("id_users"),
                                 reader.GetString("name"),
                                 reader.GetInt32("age"),
                                 reader.GetString("firstname"),
-                                reader.GetBoolean("gender")
+                                reader.GetString("gender")
                             );
                         }
                     }
@@ -49,7 +49,7 @@ namespace GSB2.DAO
         }
 
         // ✅ Créer un nouveau patient
-        public bool CreatePatient(int id_user, string name, int age, string firstname, string gender)
+        public bool CreatePatient(int id_users, string name, int age, string firstname, string gender)
         {
             using (var connection = db.GetConnection())
             {
@@ -57,10 +57,10 @@ namespace GSB2.DAO
                 {
                     connection.Open();
 
-                    string query = @"INSERT INTO Patients (id_user, name, age, firstname, gender) 
-                                     VALUES (@id_user, @name, @age, @firstname, @gender);";
+                    string query = @"INSERT INTO patients (id_users, name, age, firstname, gender) 
+                                     VALUES (@id_users, @name, @age, @firstname, @gender);";
                     MySqlCommand cmd = new MySqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@id_user", id_user);
+                    cmd.Parameters.AddWithValue("@id_users", id_users);
                     cmd.Parameters.AddWithValue("@name", name);
                     cmd.Parameters.AddWithValue("@age", age);
                     cmd.Parameters.AddWithValue("@firstname", firstname);
@@ -87,12 +87,12 @@ namespace GSB2.DAO
                     connection.Open();
 
                     string query = @"
-                INSERT INTO Patients (id_user, name, firstname, age, gender)
-                VALUES (@id_user, @name, @firstname, @age, @gender);
+                INSERT INTO patients (id_users, name, firstname, age, gender)
+                VALUES (@id_users, @name, @firstname, @age, @gender);
             ";
 
                     using MySqlCommand cmd = new MySqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@id_user", patient.Id_Users);
+                    cmd.Parameters.AddWithValue("@id_users", patient.Id_Users);
                     cmd.Parameters.AddWithValue("@name", patient.Name);
                     cmd.Parameters.AddWithValue("@firstname", patient.Firstname);
                     cmd.Parameters.AddWithValue("@age", patient.Age);
@@ -123,16 +123,16 @@ namespace GSB2.DAO
 
                     string query = @"
                 SELECT 
-                    p.id_patient,
+                    p.id_patients,
                     p.name AS patient_name,
                     p.firstname AS patient_firstname,
                     p.age,
                     p.gender,
                     u.firstname AS doctor_firstname,
                     u.name AS doctor_name
-                FROM Patients p
-                INNER JOIN Users u ON p.id_user = u.id_user
-                ORDER BY p.id_patient ASC;
+                FROM patients p
+                INNER JOIN users u ON p.id_users = u.id_users
+                ORDER BY p.id_patients ASC;
             ";
 
                     using MySqlCommand cmd = new MySqlCommand(query, connection);
@@ -142,7 +142,7 @@ namespace GSB2.DAO
                     {
                         patients.Add(new
                         {
-                            Id = reader.GetInt32("id_patient"),
+                            Id = reader.GetInt32("id_patients"),
                             Name = reader["patient_name"].ToString(),
                             Firstname = reader["patient_firstname"].ToString(),
                             Age = reader.GetInt32("age"),
@@ -170,8 +170,8 @@ namespace GSB2.DAO
                     connection.Open();
                     string query = @"
                         SELECT 
-                            id_patient,
-                            id_user,
+                            id_patients,
+                            id_users,
                             name,
                             firstname,
                             age,
@@ -184,12 +184,12 @@ namespace GSB2.DAO
                     while (reader.Read())
                     {
                         patients.Add(new Patients(
-                            reader.GetInt32("id_patient"),
-                            reader.GetInt32("id_user"),
+                            reader.GetInt32("id_patients"),
+                            reader.GetInt32("id_users"),
                             reader["name"].ToString(),
                             reader.GetInt32("age"),
                             reader["firstname"].ToString(),
-                            reader.GetBoolean("gender")
+                            reader.GetString("gender")
                         ));
                     }
                 }
@@ -210,7 +210,7 @@ namespace GSB2.DAO
                 try
                 {
                     connection.Open();
-                    string query = "DELETE FROM Patients WHERE id_patient = @id_patient;";
+                    string query = "DELETE FROM patients WHERE id_patients = @id_patient;";
                     MySqlCommand cmd = new MySqlCommand(query, connection);
                     cmd.Parameters.AddWithValue("@id_patient", id_patient);
 
@@ -235,16 +235,16 @@ namespace GSB2.DAO
                 try
                 {
                     connection.Open();
-                    string query = @"UPDATE Patients 
-                                     SET id_user = @id_user, 
+                    string query = @"UPDATE patients 
+                                     SET id_users = @id_users, 
                                          name = @name, 
                                          age = @age, 
                                          firstname = @firstname, 
                                          gender = @gender
-                                     WHERE id_patient = @id_patient;";
+                                     WHERE id_patients = @id_patient;";
 
                     MySqlCommand cmd = new MySqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@id_user", patient.Id_Users);
+                    cmd.Parameters.AddWithValue("@id_users", patient.Id_Users);
                     cmd.Parameters.AddWithValue("@name", patient.Name);
                     cmd.Parameters.AddWithValue("@age", patient.Age);
                     cmd.Parameters.AddWithValue("@firstname", patient.Firstname);

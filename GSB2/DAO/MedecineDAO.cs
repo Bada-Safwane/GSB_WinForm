@@ -43,7 +43,7 @@ namespace GSB2.DAO
                         medicines.Add(new
                         {
                             Id_medicine = reader.GetInt32("id_medicine"),
-                            Id_user = reader.GetInt32("id_user"),
+                            Id_users = reader.GetInt32("id_users"),
                             Dosage = reader["dosage"].ToString(),
                             Name = reader["medicine_name"].ToString(),
                             Description = reader["description"].ToString(),
@@ -112,7 +112,7 @@ namespace GSB2.DAO
                     m.names AS medicine_name,
                     m.description,
                     m.molecule,
-                    u.names AS user_name,
+                    u.name AS user_name,
                     u.firstname AS user_firstname
                 FROM Medicine m
                 INNER JOIN Users u ON m.id_users = u.id_users

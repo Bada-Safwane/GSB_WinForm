@@ -13,26 +13,32 @@ namespace GSB2.Forms
         private readonly Users connectedUser;
         private int? selectedUserId = null;
 
-        public MainForm(Users users)
+        public MainForm(Users user)
         {
             InitializeComponent();
-            connectedUser = users;
+            connectedUser = user; 
             LoadUserData();
             dvgUsersLoadContent();
         }
 
         private void LoadUserData()
         {
+            // Update the welcome text
             Firstname_label.Text = $"Bienvenue {connectedUser.Firstname} {connectedUser.Name} 👋";
 
+            // Update the role label
             if (!connectedUser.Role)
                 Role_label.Text = "Rôle : Médecin / Prescripteur";
             else
                 Role_label.Text = "Rôle : Administrateur";
 
+            // Show delete button only for admins
             btnDeleteUser.Visible = connectedUser.Role;
+
+            // Update the email label
             Email_label.Text = $"Email : {connectedUser.Email}";
         }
+
 
         private void dvgUsersLoadContent()
         {
@@ -43,8 +49,8 @@ namespace GSB2.Forms
                 dgvUsers.AutoGenerateColumns = true;
                 dgvUsers.DataSource = Users.GetAllUsers();
 
-                if (dgvUsers.Columns["Id"] != null)
-                    dgvUsers.Columns["Id"].Visible = false;
+                if (dgvUsers.Columns["Id_users"] != null)
+                    dgvUsers.Columns["Id_users"].Visible = false;
 
                 if (dgvUsers.Columns["Password"] != null)
                     dgvUsers.Columns["Password"].Visible = false;
@@ -61,7 +67,7 @@ namespace GSB2.Forms
             if (dgvUsers.SelectedRows.Count > 0)
             {
                 var row = dgvUsers.SelectedRows[0];
-                selectedUserId = Convert.ToInt32(row.Cells["Id"].Value);
+                selectedUserId = Convert.ToInt32(row.Cells["Id_users"].Value);
                 txtNom.Text = row.Cells["Name"].Value.ToString();
                 txtPrenom.Text = row.Cells["FirstName"].Value.ToString();
                 txtEmail.Text = row.Cells["Email"].Value.ToString();
@@ -109,7 +115,8 @@ namespace GSB2.Forms
             }
             else
             {
-                var updatedUser = new Users((int)selectedUserId, firstname, name, email, role);
+                var updatedUser = new Users((int)selectedUserId,
+                    firstname, name, email, role);
                 success = dao.UpdateUser(updatedUser);
             }
 
@@ -158,20 +165,20 @@ namespace GSB2.Forms
 
         private void BtnPatients_Click(object sender, EventArgs e)
         {
-            //PatientsForm f = new PatientsForm(connectedUser);
-            //f.Show();
+            PatientsForm f = new PatientsForm(connectedUser);
+            f.Show();
         }
 
         private void BtnPrescriptions_Click(object sender, EventArgs e)
         {
-            //PrescriptionsForm f = new PrescriptionsForm(connectedUser);
-            //f.Show();
+            PrescriptionsForm f = new PrescriptionsForm(connectedUser);
+            f.Show();
         }
 
         private void BtnMedicines_Click(object sender, EventArgs e)
         {
-            //MedicinesForm f = new MedicinesForm(connectedUser);
-            //f.Show();
+            MedicinesForm f = new MedicinesForm(connectedUser);
+            f.Show();
         }
     }
 }

@@ -13,6 +13,7 @@ namespace GSB2.Forms
         private readonly Users connectedUser;
         private int? selectedUserId = null;
 
+        // SB: Constructeur du formulaire principal - initialise les composants, charge les données utilisateur et la liste des utilisateurs
         public MainForm(Users user)
         {
             InitializeComponent();
@@ -21,6 +22,7 @@ namespace GSB2.Forms
             dvgUsersLoadContent();
         }
 
+        // SB: Charge les données de l'utilisateur connecté - affiche nom, prénom, email, rôle et adapte l'interface selon les permissions
         private void LoadUserData()
         {
             // Update the welcome text
@@ -39,7 +41,7 @@ namespace GSB2.Forms
             Email_label.Text = $"Email : {connectedUser.Email}";
         }
 
-
+        // SB: Charge la liste de tous les utilisateurs dans le DataGridView - visible uniquement pour les administrateurs
         private void dvgUsersLoadContent()
         {
             if (connectedUser.Role)
@@ -62,6 +64,7 @@ namespace GSB2.Forms
             }
         }
 
+        // SB: Gère la sélection d'une ligne dans le DataGridView - remplit les champs d'édition avec les données de l'utilisateur sélectionné
         private void DgvUsers_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvUsers.SelectedRows.Count > 0)
@@ -76,6 +79,7 @@ namespace GSB2.Forms
             }
         }
 
+        // SB: Gère le clic sur le bouton Nouveau utilisateur - réinitialise tous les champs de saisie pour créer un nouvel utilisateur
         private void BtnNewUser_Click(object sender, EventArgs e)
         {
             selectedUserId = null;
@@ -87,6 +91,7 @@ namespace GSB2.Forms
             dgvUsers.ClearSelection();
         }
 
+        // SB: Gère le clic sur le bouton Enregistrer - crée un nouvel utilisateur ou met à jour un utilisateur existant selon le contexte
         private void BtnSaveUser_Click(object sender, EventArgs e)
         {
             var dao = new UserDAO();
@@ -128,6 +133,7 @@ namespace GSB2.Forms
             }
         }
 
+        // SB: Gère le clic sur le bouton Supprimer - supprime l'utilisateur sélectionné après confirmation
         private void BtnDeleteUser_Click(object sender, EventArgs e)
         {
             if (selectedUserId == null)
@@ -151,7 +157,7 @@ namespace GSB2.Forms
             }
         }
 
-
+        // SB: Gère le clic sur le bouton Déconnexion - demande confirmation puis redirige vers le formulaire de connexion
         private void Logout_button_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Voulez-vous vous déconnecter ?", "Déconnexion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -163,20 +169,26 @@ namespace GSB2.Forms
             }
         }
 
+        // SB: Gère le clic sur le bouton Patients - ouvre le formulaire de gestion des patients
         private void BtnPatients_Click(object sender, EventArgs e)
         {
+            this.Hide();
             PatientsForm f = new PatientsForm(connectedUser);
             f.Show();
         }
 
+        // SB: Gère le clic sur le bouton Prescriptions - ouvre le formulaire de gestion des prescriptions
         private void BtnPrescriptions_Click(object sender, EventArgs e)
         {
+            this.Hide();
             PrescriptionsForm f = new PrescriptionsForm(connectedUser);
             f.Show();
         }
 
+        // SB: Gère le clic sur le bouton Médicaments - ouvre le formulaire de gestion des médicaments
         private void BtnMedicines_Click(object sender, EventArgs e)
         {
+            this.Hide();
             MedicinesForm f = new MedicinesForm(connectedUser);
             f.Show();
         }

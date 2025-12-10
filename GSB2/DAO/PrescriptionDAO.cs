@@ -79,7 +79,7 @@ namespace GSB2.DAO
                 transaction = connection.BeginTransaction();
 
                 MySqlCommand cmd = new MySqlCommand(
-                    @"INSERT INTO Prescription (id_users, id_patient, validity)
+                    @"INSERT INTO Prescription (id_users, id_patientS, validity)
                       VALUES (@id_users, @id_patient, @validity);", connection, transaction);
                 cmd.Parameters.AddWithValue("@id_users", prescription.Id_users);
                 cmd.Parameters.AddWithValue("@id_patient", prescription.Id_patients);
@@ -90,7 +90,7 @@ namespace GSB2.DAO
                 foreach (var med in medicines)
                 {
                     MySqlCommand medCmd = new MySqlCommand(
-                        @"INSERT INTO liai_medicine_prescription (id_prescription, id_medicine, quantity)
+                        @"INSERT INTO liai_medicine_prescription (id_prescrition, id_medicine, quantity)
                           VALUES (@id_prescription, @id_medicine, @quantity);", connection, transaction);
                     medCmd.Parameters.AddWithValue("@id_prescription", newPrescriptionId);
                     medCmd.Parameters.AddWithValue("@id_medicine", med.Id_medicine);
@@ -160,7 +160,7 @@ namespace GSB2.DAO
             try
             {
                 connection.Open();
-                string query = @"SELECT id_medicine, quantity FROM liai_medicine_prescription WHERE id_prescription = @id";
+                string query = @"SELECT id_medicine, quantity FROM liai_medicine_prescription WHERE id_prescrition = @id";
                 using var cmd = new MySqlCommand(query, connection);
                 cmd.Parameters.AddWithValue("@id", id_prescription);
                 using var reader = cmd.ExecuteReader();

@@ -13,6 +13,7 @@ namespace GSB2.Forms
         private readonly PatientDAO patientDAO = new PatientDAO();
         private readonly Users currentUser;
 
+        // SB: Constructeur du formulaire de gestion des patients - initialise les composants et charge la liste des patients
         public PatientsForm(Users user)
         {
             InitializeComponent();
@@ -21,6 +22,7 @@ namespace GSB2.Forms
             dgvPatients.Anchor = AnchorStyles.Left | AnchorStyles.Right;
         }
 
+        // SB: Charge la liste de tous les patients dans le DataGridView - configure les en-têtes de colonnes et masque l'ID
         private void LoadPatients()
         {
             try
@@ -46,16 +48,19 @@ namespace GSB2.Forms
             }
         }
 
+        // SB: Gère le clic sur le bouton Actualiser - recharge la liste des patients depuis la base de données
         private void BtnRefresh_Click(object sender, EventArgs e)
         {
             LoadPatients();
         }
 
+        // SB: Gère le clic sur le bouton Ajouter - affiche ou masque le panneau d'ajout de patient
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             groupBoxAdd.Visible = !groupBoxAdd.Visible;
         }
 
+        // SB: Gère le clic sur le bouton Enregistrer - crée un nouveau patient avec les données saisies et l'associe à l'utilisateur connecté
         private void BtnSave_Click(object sender, EventArgs e)
         {
             try
@@ -66,7 +71,7 @@ namespace GSB2.Forms
                     Firstname = txtFirstname.Text,
                     Name = txtName.Text,
                     Age = int.Parse(txtAge.Text),
-                    Gender = cmbGender.SelectedItem.ToString() ?? "Inconnu"
+                    Gender = cmbGender.SelectedItem.ToString()
                 };
 
                 bool result = patientDAO.Insert(patient);
@@ -89,6 +94,7 @@ namespace GSB2.Forms
             }
         }
 
+        // SB: Gère le clic sur le bouton Supprimer - supprime le patient sélectionné après confirmation
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             if (dgvPatients.SelectedRows.Count == 0)
@@ -115,12 +121,23 @@ namespace GSB2.Forms
             }
         }
 
+        // SB: Réinitialise tous les champs de saisie du formulaire d'ajout de patient
         private void ClearFields()
         {
             txtFirstname.Clear();
             txtName.Clear();
             txtAge.Clear();
             cmbGender.SelectedIndex = -1;
+        }
+
+        // SB: Gère le clic sur le bouton Retour - ferme le formulaire actuel et retourne au menu principal
+        private void btnBackToMain_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            MainForm newForm = new MainForm(currentUser);
+
+            // Show the new form
+            newForm.Show();
         }
     }
 }

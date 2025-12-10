@@ -169,15 +169,9 @@ namespace GSB2.DAO
                 {
                     connection.Open();
                     string query = @"
-                        SELECT 
-                            id_patients,
-                            id_users,
-                            name,
-                            firstname,
-                            age,
-                            gender
-                        FROM Patients
-                        ORDER BY name, firstname ASC;
+                    SELECT id_patients,id_users, name, age, firstname, gender
+                    FROM Patients
+                    ORDER BY name, firstname ASC;
                     ";
                     using MySqlCommand cmd = new MySqlCommand(query, connection);
                     using var reader = cmd.ExecuteReader();
@@ -189,7 +183,7 @@ namespace GSB2.DAO
                             reader["name"].ToString(),
                             reader.GetInt32("age"),
                             reader["firstname"].ToString(),
-                            reader.GetString("gender")
+                            reader["gender"].ToString()
                         ));
                     }
                 }

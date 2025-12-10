@@ -17,6 +17,7 @@ namespace GSB2.Forms
 
         private int? editingPrescriptionId = null;
 
+        // SB: Constructeur du formulaire de gestion des prescriptions - initialise les composants et charge les données (patients, médicaments, prescriptions)
         public PrescriptionsForm(Users user)
         {
             InitializeComponent();
@@ -26,6 +27,7 @@ namespace GSB2.Forms
             LoadPrescriptions();
         }
 
+        // SB: Charge la liste des patients dans la ComboBox - affiche le nom complet (Nom + Prénom) pour la sélection
         private void LoadPatients()
         {
             try
@@ -41,6 +43,7 @@ namespace GSB2.Forms
             }
         }
 
+        // SB: Charge la liste des médicaments dans le DataGridView avec cases à cocher - permet de sélectionner les médicaments et saisir les quantités
         private void LoadMedicinesGrid()
         {
             dgvMedicines.Rows.Clear();
@@ -58,14 +61,17 @@ namespace GSB2.Forms
             }
         }
 
+        // SB: Charge la liste de toutes les prescriptions dans le DataGridView principal - masque la colonne ID
         private void LoadPrescriptions()
         {
             dgvPrescriptions.DataSource = prescriptionDAO.GetAllPrescriptions();
             dgvPrescriptions.Columns["Id"].Visible = false;
         }
 
+        // SB: Gère le clic sur le bouton Actualiser - recharge la liste des prescriptions depuis la base de données
         private void BtnRefresh_Click(object sender, EventArgs e) => LoadPrescriptions();
 
+        // SB: Gère le clic sur le bouton Ajouter - affiche ou masque le panneau d'ajout/modification de prescription et réinitialise les champs
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             groupBoxAdd.Visible = !groupBoxAdd.Visible;
@@ -73,6 +79,7 @@ namespace GSB2.Forms
             editingPrescriptionId = null;
         }
 
+        // SB: Gère le clic sur une ligne de prescription - charge les données de la prescription sélectionnée pour modification (patient, date, médicaments et quantités)
         private void DgvPrescriptions_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
@@ -105,6 +112,7 @@ namespace GSB2.Forms
             groupBoxAdd.Visible = true;
         }
 
+        // SB: Gère le clic sur le bouton Enregistrer - crée une nouvelle prescription ou met à jour une prescription existante avec les médicaments et quantités sélectionnés
         private void BtnSave_Click(object sender, EventArgs e)
         {
             if (cmbPatients.SelectedValue == null) return;
@@ -149,6 +157,7 @@ namespace GSB2.Forms
                 MessageBox.Show("❌ Erreur lors de l'enregistrement.");
         }
 
+        // SB: Gère le clic sur le bouton Supprimer - supprime la prescription sélectionnée après confirmation
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             if (dgvPrescriptions.SelectedRows.Count == 0) return;
@@ -162,6 +171,7 @@ namespace GSB2.Forms
             }
         }
 
+        // SB: Gère le clic sur le bouton Exporter PDF - génère un fichier PDF de la prescription sélectionnée avec les informations du patient, médecin et médicaments
         private void BtnExportPdf_Click(object sender, EventArgs e)
         {
             if (dgvPrescriptions.SelectedRows.Count == 0)
@@ -184,7 +194,7 @@ namespace GSB2.Forms
             PdfExporter.ExportPrescription(presc, patient, currentUser, meds);
         }
 
-
+        // SB: Réinitialise tous les champs de saisie du formulaire de prescription - date par défaut à aujourd'hui et désélectionne tous les médicaments
         private void ClearFields()
         {
             dtpValidity.Value = DateTime.Now;
@@ -193,6 +203,16 @@ namespace GSB2.Forms
                 row.Cells["colSelect"].Value = false;
                 row.Cells["colQuantity"].Value = "";
             }
+        }
+
+        // SB: Gère le clic sur le bouton Retour - ferme le formulaire actuel et retourne au menu principal
+        private void btnBackToMain_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            MainForm newForm = new MainForm(currentUser);
+
+            // Show the new form
+            newForm.Show();
         }
     }
 }

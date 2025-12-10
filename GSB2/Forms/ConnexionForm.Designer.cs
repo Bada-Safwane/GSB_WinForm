@@ -2,15 +2,8 @@
 {
     partial class ConnexionForm
     {
-        /// <summary>
-        ///  Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        ///  Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -24,174 +17,229 @@
 
         private void InitializeComponent()
         {
+            pnlMain = new Panel();
+            pnlCard = new Panel();
+            labelTitre = new Label();
+            labelSubtitle = new Label();
+            pnlForm = new Panel();
+            labelEmail = new Label();
             textBoxEmail = new TextBox();
+            labelMdp = new Label();
             textBoxMdp = new TextBox();
             buttonConnexion = new Button();
+            pnlDivider = new Panel();
+            lblOr = new Label();
             buttonRedirCreat = new Button();
-            labelEmail = new Label();
-            labelMdp = new Label();
-            labelTitre = new Label();
-            layout = new TableLayoutPanel();
-            buttonsPanel = new FlowLayoutPanel();
-            layout.SuspendLayout();
-            buttonsPanel.SuspendLayout();
+
+            pnlMain.SuspendLayout();
+            pnlCard.SuspendLayout();
+            pnlForm.SuspendLayout();
+            pnlDivider.SuspendLayout();
             SuspendLayout();
+
             // 
-            // textBoxEmail
+            // pnlMain
             // 
-            textBoxEmail.Dock = DockStyle.Top;
-            textBoxEmail.Font = new Font("Segoe UI", 11F);
-            textBoxEmail.Location = new Point(200, 155);
-            textBoxEmail.Margin = new Padding(200, 5, 200, 10);
-            textBoxEmail.Name = "textBoxEmail";
-            textBoxEmail.Size = new Size(400, 37);
-            textBoxEmail.TabIndex = 3;
+            pnlMain.BackColor = Color.FromArgb(245, 247, 250);
+            pnlMain.Controls.Add(pnlCard);
+            pnlMain.Dock = DockStyle.Fill;
+            pnlMain.Location = new Point(0, 0);
+            pnlMain.Name = "pnlMain";
+            pnlMain.Padding = new Padding(50);
+            pnlMain.Size = new Size(600, 650);
+            pnlMain.TabIndex = 0;
+
             // 
-            // textBoxMdp
+            // pnlCard
             // 
-            textBoxMdp.Dock = DockStyle.Top;
-            textBoxMdp.Font = new Font("Segoe UI", 11F);
-            textBoxMdp.Location = new Point(200, 422);
-            textBoxMdp.Margin = new Padding(200, 5, 200, 20);
-            textBoxMdp.Name = "textBoxMdp";
-            textBoxMdp.PasswordChar = '*';
-            textBoxMdp.Size = new Size(400, 37);
-            textBoxMdp.TabIndex = 5;
-            // 
-            // buttonConnexion
-            // 
-            buttonConnexion.AutoSize = true;
-            buttonConnexion.BackColor = Color.FromArgb(58, 131, 217);
-            buttonConnexion.FlatAppearance.BorderSize = 0;
-            buttonConnexion.FlatStyle = FlatStyle.Flat;
-            buttonConnexion.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            buttonConnexion.ForeColor = Color.White;
-            buttonConnexion.Location = new Point(190, 23);
-            buttonConnexion.Name = "buttonConnexion";
-            buttonConnexion.Size = new Size(122, 38);
-            buttonConnexion.TabIndex = 1;
-            buttonConnexion.Text = "Connexion";
-            buttonConnexion.UseVisualStyleBackColor = false;
-            buttonConnexion.Click += buttonConnexion_Click;
-            // 
-            // buttonRedirCreat
-            // 
-            buttonRedirCreat.AutoSize = true;
-            buttonRedirCreat.BackColor = Color.FromArgb(230, 230, 230);
-            buttonRedirCreat.FlatAppearance.BorderSize = 0;
-            buttonRedirCreat.FlatStyle = FlatStyle.Flat;
-            buttonRedirCreat.Font = new Font("Segoe UI", 10F);
-            buttonRedirCreat.Location = new Point(0, 20);
-            buttonRedirCreat.Margin = new Padding(0, 0, 20, 0);
-            buttonRedirCreat.Name = "buttonRedirCreat";
-            buttonRedirCreat.Size = new Size(167, 38);
-            buttonRedirCreat.TabIndex = 0;
-            buttonRedirCreat.Text = "Créer un compte";
-            buttonRedirCreat.UseVisualStyleBackColor = false;
-            buttonRedirCreat.Click += buttonRedirCreat_Click;
-            // 
-            // labelEmail
-            // 
-            labelEmail.Dock = DockStyle.Fill;
-            labelEmail.Font = new Font("Segoe UI", 11F);
-            labelEmail.Location = new Point(3, 120);
-            labelEmail.Name = "labelEmail";
-            labelEmail.Size = new Size(794, 30);
-            labelEmail.TabIndex = 2;
-            labelEmail.Text = "Adresse email";
-            labelEmail.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // labelMdp
-            // 
-            labelMdp.Dock = DockStyle.Fill;
-            labelMdp.Font = new Font("Segoe UI", 11F);
-            labelMdp.Location = new Point(3, 202);
-            labelMdp.Name = "labelMdp";
-            labelMdp.Size = new Size(794, 23);
-            labelMdp.TabIndex = 4;
-            labelMdp.Text = "Mot de passe";
-            labelMdp.TextAlign = ContentAlignment.MiddleCenter;
+            pnlCard.BackColor = Color.White;
+            pnlCard.Controls.Add(labelTitre);
+            pnlCard.Controls.Add(labelSubtitle);
+            pnlCard.Controls.Add(pnlForm);
+            pnlCard.Controls.Add(buttonConnexion);
+            pnlCard.Controls.Add(pnlDivider);
+            pnlCard.Controls.Add(buttonRedirCreat);
+            pnlCard.Dock = DockStyle.Fill;
+            pnlCard.Location = new Point(50, 50);
+            pnlCard.Name = "pnlCard";
+            pnlCard.Padding = new Padding(40, 30, 40, 30);
+            pnlCard.Size = new Size(500, 550);
+            pnlCard.TabIndex = 0;
+
             // 
             // labelTitre
             // 
             labelTitre.Dock = DockStyle.Top;
-            labelTitre.Font = new Font("Segoe UI", 28F, FontStyle.Bold);
-            labelTitre.Location = new Point(0, 40);
-            labelTitre.Margin = new Padding(0, 0, 0, 20);
+            labelTitre.Font = new Font("Segoe UI", 24F, FontStyle.Bold);
+            labelTitre.ForeColor = Color.FromArgb(41, 50, 65);
+            labelTitre.Location = new Point(40, 30);
             labelTitre.Name = "labelTitre";
-            labelTitre.Size = new Size(800, 60);
+            labelTitre.Size = new Size(420, 60);
             labelTitre.TabIndex = 0;
-            labelTitre.Text = "GSB";
+            labelTitre.Text = "GSB Manager";
             labelTitre.TextAlign = ContentAlignment.MiddleCenter;
+
             // 
-            // layout
+            // labelSubtitle
             // 
-            layout.AutoScroll = true;
-            layout.ColumnCount = 1;
-            layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            layout.Controls.Add(labelTitre, 0, 0);
-            layout.Controls.Add(labelEmail, 0, 1);
-            layout.Controls.Add(textBoxEmail, 0, 3);
-            layout.Controls.Add(labelMdp, 0, 4);
-            layout.Controls.Add(textBoxMdp, 0, 5);
-            layout.Controls.Add(buttonsPanel, 0, 6);
-            layout.Dock = DockStyle.Fill;
-            layout.Location = new Point(0, 0);
-            layout.Name = "layout";
-            layout.Padding = new Padding(0, 40, 0, 0);
-            layout.RowCount = 7;
-            layout.RowStyles.Add(new RowStyle());
-            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-            layout.RowStyles.Add(new RowStyle());
-            layout.RowStyles.Add(new RowStyle());
-            layout.RowStyles.Add(new RowStyle());
-            layout.RowStyles.Add(new RowStyle());
-            layout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            layout.Size = new Size(800, 437);
-            layout.TabIndex = 0;
+            labelSubtitle.Dock = DockStyle.Top;
+            labelSubtitle.Font = new Font("Segoe UI", 10F);
+            labelSubtitle.ForeColor = Color.Gray;
+            labelSubtitle.Location = new Point(40, 90);
+            labelSubtitle.Name = "labelSubtitle";
+            labelSubtitle.Size = new Size(420, 30);
+            labelSubtitle.TabIndex = 1;
+            labelSubtitle.Text = "Connectez-vous à votre compte";
+            labelSubtitle.TextAlign = ContentAlignment.MiddleCenter;
+
             // 
-            // buttonsPanel
+            // pnlForm
             // 
-            buttonsPanel.Anchor = AnchorStyles.None;
-            buttonsPanel.AutoSize = true;
-            buttonsPanel.Controls.Add(buttonRedirCreat);
-            buttonsPanel.Controls.Add(buttonConnexion);
-            buttonsPanel.Location = new Point(242, 289);
-            buttonsPanel.Name = "buttonsPanel";
-            buttonsPanel.Padding = new Padding(0, 20, 0, 0);
-            buttonsPanel.Size = new Size(315, 64);
-            buttonsPanel.TabIndex = 6;
-            buttonsPanel.WrapContents = false;
+            pnlForm.Controls.Add(labelEmail);
+            pnlForm.Controls.Add(textBoxEmail);
+            pnlForm.Controls.Add(labelMdp);
+            pnlForm.Controls.Add(textBoxMdp);
+            pnlForm.Dock = DockStyle.Top;
+            pnlForm.Location = new Point(40, 120);
+            pnlForm.Name = "pnlForm";
+            pnlForm.Padding = new Padding(0, 30, 0, 0);
+            pnlForm.Size = new Size(420, 230);
+            pnlForm.TabIndex = 2;
+
+            // 
+            // labelEmail
+            // 
+            labelEmail.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            labelEmail.ForeColor = Color.FromArgb(41, 50, 65);
+            labelEmail.Location = new Point(0, 30);
+            labelEmail.Name = "labelEmail";
+            labelEmail.Size = new Size(420, 25);
+            labelEmail.TabIndex = 0;
+            labelEmail.Text = "Adresse email";
+
+            // 
+            // textBoxEmail
+            // 
+            textBoxEmail.BorderStyle = BorderStyle.FixedSingle;
+            textBoxEmail.Font = new Font("Segoe UI", 11F);
+            textBoxEmail.Location = new Point(0, 60);
+            textBoxEmail.Name = "textBoxEmail";
+            textBoxEmail.Size = new Size(420, 27);
+            textBoxEmail.TabIndex = 1;
+
+            // 
+            // labelMdp
+            // 
+            labelMdp.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            labelMdp.ForeColor = Color.FromArgb(41, 50, 65);
+            labelMdp.Location = new Point(0, 120);
+            labelMdp.Name = "labelMdp";
+            labelMdp.Size = new Size(420, 25);
+            labelMdp.TabIndex = 2;
+            labelMdp.Text = "Mot de passe";
+
+            // 
+            // textBoxMdp
+            // 
+            textBoxMdp.BorderStyle = BorderStyle.FixedSingle;
+            textBoxMdp.Font = new Font("Segoe UI", 11F);
+            textBoxMdp.Location = new Point(0, 150);
+            textBoxMdp.Name = "textBoxMdp";
+            textBoxMdp.PasswordChar = '●';
+            textBoxMdp.Size = new Size(420, 27);
+            textBoxMdp.TabIndex = 3;
+
+            // 
+            // buttonConnexion
+            // 
+            buttonConnexion.BackColor = Color.FromArgb(52, 152, 219);
+            buttonConnexion.Cursor = Cursors.Hand;
+            buttonConnexion.FlatAppearance.BorderSize = 0;
+            buttonConnexion.FlatStyle = FlatStyle.Flat;
+            buttonConnexion.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            buttonConnexion.ForeColor = Color.White;
+            buttonConnexion.Location = new Point(40, 360);
+            buttonConnexion.Name = "buttonConnexion";
+            buttonConnexion.Size = new Size(420, 50);
+            buttonConnexion.TabIndex = 3;
+            buttonConnexion.Text = "→ Se connecter";
+            buttonConnexion.UseVisualStyleBackColor = false;
+            buttonConnexion.Click += buttonConnexion_Click;
+
+            // 
+            // pnlDivider
+            // 
+            pnlDivider.Controls.Add(lblOr);
+            pnlDivider.Location = new Point(40, 425);
+            pnlDivider.Name = "pnlDivider";
+            pnlDivider.Size = new Size(420, 30);
+            pnlDivider.TabIndex = 4;
+
+            // 
+            // lblOr
+            // 
+            lblOr.Dock = DockStyle.Fill;
+            lblOr.Font = new Font("Segoe UI", 9F);
+            lblOr.ForeColor = Color.Gray;
+            lblOr.Location = new Point(0, 0);
+            lblOr.Name = "lblOr";
+            lblOr.Size = new Size(420, 30);
+            lblOr.TabIndex = 0;
+            lblOr.Text = "━━━━━━━━  ou  ━━━━━━━━";
+            lblOr.TextAlign = ContentAlignment.MiddleCenter;
+
+            // 
+            // buttonRedirCreat
+            // 
+            buttonRedirCreat.BackColor = Color.Transparent;
+            buttonRedirCreat.Cursor = Cursors.Hand;
+            buttonRedirCreat.FlatAppearance.BorderColor = Color.FromArgb(52, 152, 219);
+            buttonRedirCreat.FlatAppearance.BorderSize = 2;
+            buttonRedirCreat.FlatStyle = FlatStyle.Flat;
+            buttonRedirCreat.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            buttonRedirCreat.ForeColor = Color.FromArgb(52, 152, 219);
+            buttonRedirCreat.Location = new Point(40, 465);
+            buttonRedirCreat.Name = "buttonRedirCreat";
+            buttonRedirCreat.Size = new Size(420, 50);
+            buttonRedirCreat.TabIndex = 5;
+            buttonRedirCreat.Text = "✓ Créer un nouveau compte";
+            buttonRedirCreat.UseVisualStyleBackColor = false;
+            buttonRedirCreat.Click += buttonRedirCreat_Click;
+
             // 
             // ConnexionForm
             // 
-            BackColor = Color.WhiteSmoke;
-            ClientSize = new Size(800, 437);
-            Controls.Add(layout);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(600, 650);
+            Controls.Add(pnlMain);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "ConnexionForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Connexion";
-            layout.ResumeLayout(false);
-            layout.PerformLayout();
-            buttonsPanel.ResumeLayout(false);
-            buttonsPanel.PerformLayout();
+            Text = "GSB Manager - Connexion";
+            pnlMain.ResumeLayout(false);
+            pnlCard.ResumeLayout(false);
+            pnlForm.ResumeLayout(false);
+            pnlForm.PerformLayout();
+            pnlDivider.ResumeLayout(false);
             ResumeLayout(false);
         }
 
-
-
-
         #endregion
 
-        private System.Windows.Forms.TextBox textBoxEmail;
-        private System.Windows.Forms.TextBox textBoxMdp;
-        private System.Windows.Forms.Button buttonConnexion;
-        private Button buttonRedirCreat;
-        private Label labelEmail;
-        private Label labelMdp;
+        private Panel pnlMain;
+        private Panel pnlCard;
         private Label labelTitre;
-        private TableLayoutPanel layout;
-        private FlowLayoutPanel buttonsPanel;
+        private Label labelSubtitle;
+        private Panel pnlForm;
+        private Label labelEmail;
+        private TextBox textBoxEmail;
+        private Label labelMdp;
+        private TextBox textBoxMdp;
+        private Button buttonConnexion;
+        private Panel pnlDivider;
+        private Label lblOr;
+        private Button buttonRedirCreat;
     }
 }

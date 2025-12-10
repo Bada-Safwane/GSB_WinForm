@@ -14,11 +14,13 @@ namespace GSB2.Forms
 {
     public partial class RegisterForm : Form
     {
+        // SB: Constructeur du formulaire d'inscription - initialise les composants du formulaire
         public RegisterForm()
         {
             InitializeComponent();
         }
 
+        // SB: Gère le clic sur le bouton de création de compte - valide les champs, crée l'utilisateur dans la base et redirige vers la connexion
         private void buttonCreateAccount_Click(object sender, EventArgs e)
         {
             string name = txtName.Text.Trim();

@@ -3,8 +3,48 @@
   "WorkspaceRootPath": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|c:\\users\\safwa\\desktop\\dev\\gsb2\\gsb2\\forms\\prescriptionsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|solutionrelative:gsb2\\forms\\prescriptionsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|c:\\users\\safwa\\desktop\\dev\\gsb2\\gsb2\\forms\\prescriptionsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|solutionrelative:gsb2\\forms\\prescriptionsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|c:\\users\\safwa\\desktop\\dev\\gsb2\\gsb2\\forms\\patientsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|solutionrelative:gsb2\\forms\\patientsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|c:\\users\\safwa\\desktop\\dev\\gsb2\\gsb2\\forms\\medicinesform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|solutionrelative:gsb2\\forms\\medicinesform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|c:\\users\\safwa\\desktop\\dev\\gsb2\\gsb2\\forms\\patientsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|solutionrelative:gsb2\\forms\\patientsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|c:\\users\\safwa\\desktop\\dev\\gsb2\\gsb2\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|solutionrelative:gsb2\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|c:\\users\\safwa\\desktop\\dev\\gsb2\\gsb2\\forms\\connexionform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|solutionrelative:gsb2\\forms\\connexionform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|c:\\users\\safwa\\desktop\\dev\\gsb2\\gsb2\\dao\\prescriptiondao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|solutionrelative:gsb2\\dao\\prescriptiondao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|c:\\users\\safwa\\desktop\\dev\\gsb2\\gsb2\\models\\patients.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|solutionrelative:gsb2\\models\\patients.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|c:\\users\\safwa\\desktop\\dev\\gsb2\\gsb2\\utils\\pdfexporter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|solutionrelative:gsb2\\utils\\pdfexporter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|c:\\users\\safwa\\desktop\\dev\\gsb2\\gsb2\\forms\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|solutionrelative:gsb2\\forms\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|c:\\users\\safwa\\desktop\\dev\\gsb2\\gsb2\\dao\\userdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -15,24 +55,8 @@
       "RelativeMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|solutionrelative:gsb2\\models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|c:\\users\\safwa\\desktop\\dev\\gsb2\\gsb2\\forms\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|solutionrelative:gsb2\\forms\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|c:\\users\\safwa\\desktop\\dev\\gsb2\\gsb2\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|solutionrelative:gsb2\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|c:\\users\\safwa\\desktop\\dev\\gsb2\\gsb2\\forms\\connexionform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|solutionrelative:gsb2\\forms\\connexionform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|c:\\users\\safwa\\desktop\\dev\\gsb2\\gsb2\\forms\\connexionform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|solutionrelative:gsb2\\forms\\connexionform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|c:\\users\\safwa\\desktop\\dev\\gsb2\\gsb2\\forms\\connexionform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3A7BBC57-91C7-4024-9EB9-F8FE2AAB8869}|GSB2\\GSB2.csproj|solutionrelative:gsb2\\forms\\connexionform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,19 +66,33 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ConnexionForm.cs",
-              "DocumentMoniker": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\ConnexionForm.cs",
-              "RelativeDocumentMoniker": "GSB2\\Forms\\ConnexionForm.cs",
-              "ToolTip": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\ConnexionForm.cs",
-              "RelativeToolTip": "GSB2\\Forms\\ConnexionForm.cs",
-              "ViewState": "AgIAADcAAAAAAAAAAAAowEMAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "PrescriptionsForm.cs",
+              "DocumentMoniker": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\PrescriptionsForm.cs",
+              "RelativeDocumentMoniker": "GSB2\\Forms\\PrescriptionsForm.cs",
+              "ToolTip": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\PrescriptionsForm.cs",
+              "RelativeToolTip": "GSB2\\Forms\\PrescriptionsForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMwAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-01T10:26:07.55Z",
+              "WhenOpened": "2025-12-07T10:23:55.19Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MainForm.cs",
+              "DocumentMoniker": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\MainForm.cs",
+              "RelativeDocumentMoniker": "GSB2\\Forms\\MainForm.cs",
+              "ToolTip": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\MainForm.cs",
+              "RelativeToolTip": "GSB2\\Forms\\MainForm.cs",
+              "ViewState": "AgIAAJcAAAAAAAAAAAAwwKcAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T13:55:15.246Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
@@ -68,7 +106,109 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PrescriptionsForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\PrescriptionsForm.cs",
+              "RelativeDocumentMoniker": "GSB2\\Forms\\PrescriptionsForm.cs",
+              "ToolTip": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\PrescriptionsForm.cs [Design]",
+              "RelativeToolTip": "GSB2\\Forms\\PrescriptionsForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T14:22:25.975Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PatientsForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\PatientsForm.cs",
+              "RelativeDocumentMoniker": "GSB2\\Forms\\PatientsForm.cs",
+              "ToolTip": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\PatientsForm.cs [Design]",
+              "RelativeToolTip": "GSB2\\Forms\\PatientsForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T14:22:03.77Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MedicinesForm.cs",
+              "DocumentMoniker": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\MedicinesForm.cs",
+              "RelativeDocumentMoniker": "GSB2\\Forms\\MedicinesForm.cs",
+              "ToolTip": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\MedicinesForm.cs",
+              "RelativeToolTip": "GSB2\\Forms\\MedicinesForm.cs",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAqwIYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T15:51:00.5Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "PatientsForm.cs",
+              "DocumentMoniker": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\PatientsForm.cs",
+              "RelativeDocumentMoniker": "GSB2\\Forms\\PatientsForm.cs",
+              "ToolTip": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\PatientsForm.cs",
+              "RelativeToolTip": "GSB2\\Forms\\PatientsForm.cs",
+              "ViewState": "AgIAAG4AAAAAAAAAAAASwIMAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T13:54:09.25Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ConnexionForm.cs",
+              "DocumentMoniker": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\ConnexionForm.cs",
+              "RelativeDocumentMoniker": "GSB2\\Forms\\ConnexionForm.cs",
+              "ToolTip": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\ConnexionForm.cs",
+              "RelativeToolTip": "GSB2\\Forms\\ConnexionForm.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAQwCsAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T14:13:01.047Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PrescriptionDAO.cs",
+              "DocumentMoniker": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\DAO\\PrescriptionDAO.cs",
+              "RelativeDocumentMoniker": "GSB2\\DAO\\PrescriptionDAO.cs",
+              "ToolTip": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\DAO\\PrescriptionDAO.cs",
+              "RelativeToolTip": "GSB2\\DAO\\PrescriptionDAO.cs",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAQwG0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T09:17:33.404Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Patients.cs",
+              "DocumentMoniker": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Models\\Patients.cs",
+              "RelativeDocumentMoniker": "GSB2\\Models\\Patients.cs",
+              "ToolTip": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Models\\Patients.cs",
+              "RelativeToolTip": "GSB2\\Models\\Patients.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAA3wBgAAABdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T09:11:32.774Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "PdfExporter.cs",
+              "DocumentMoniker": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Utils\\PdfExporter.cs",
+              "RelativeDocumentMoniker": "GSB2\\Utils\\PdfExporter.cs",
+              "ToolTip": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Utils\\PdfExporter.cs",
+              "RelativeToolTip": "GSB2\\Utils\\PdfExporter.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAAwCAAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T08:36:26.946Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "Users.cs",
               "DocumentMoniker": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Models\\Users.cs",
               "RelativeDocumentMoniker": "GSB2\\Models\\Users.cs",
@@ -81,7 +221,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 10,
+              "Title": "MainForm.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\MainForm.Designer.cs",
+              "RelativeDocumentMoniker": "GSB2\\Forms\\MainForm.Designer.cs",
+              "ToolTip": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\MainForm.Designer.cs",
+              "RelativeToolTip": "GSB2\\Forms\\MainForm.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T13:17:07.742Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "UserDAO.cs",
               "DocumentMoniker": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\DAO\\UserDAO.cs",
               "RelativeDocumentMoniker": "GSB2\\DAO\\UserDAO.cs",
@@ -94,45 +247,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MainForm.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\MainForm.cs",
-              "RelativeDocumentMoniker": "GSB2\\Forms\\MainForm.cs",
-              "ToolTip": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\MainForm.cs [Design]",
-              "RelativeToolTip": "GSB2\\Forms\\MainForm.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T15:24:35.162Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MainForm.cs",
-              "DocumentMoniker": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\MainForm.cs",
-              "RelativeDocumentMoniker": "GSB2\\Forms\\MainForm.cs",
-              "ToolTip": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\MainForm.cs",
-              "RelativeToolTip": "GSB2\\Forms\\MainForm.cs",
-              "ViewState": "AgIAACkAAAAAAAAAAAASwDQAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T13:55:15.246Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MainForm.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\MainForm.Designer.cs",
-              "RelativeDocumentMoniker": "GSB2\\Forms\\MainForm.Designer.cs",
-              "ToolTip": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\MainForm.Designer.cs",
-              "RelativeToolTip": "GSB2\\Forms\\MainForm.Designer.cs",
-              "ViewState": "AgIAAPYAAAAAAAAAAAAgwDMBAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T13:17:07.742Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 13,
               "Title": "ConnexionForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\ConnexionForm.cs",
               "RelativeDocumentMoniker": "GSB2\\Forms\\ConnexionForm.cs",
@@ -141,19 +256,6 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-02T13:03:33.36Z",
               "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ConnexionForm.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\ConnexionForm.Designer.cs",
-              "RelativeDocumentMoniker": "GSB2\\Forms\\ConnexionForm.Designer.cs",
-              "ToolTip": "C:\\Users\\safwa\\Desktop\\DEV\\GSB2\\GSB2\\Forms\\ConnexionForm.Designer.cs",
-              "RelativeToolTip": "GSB2\\Forms\\ConnexionForm.Designer.cs",
-              "ViewState": "AgIAAIMAAAAAAAAAAAAAAJcAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T12:52:06.093Z",
-              "EditorCaption": ""
             }
           ]
         }

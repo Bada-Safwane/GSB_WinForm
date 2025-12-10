@@ -8,6 +8,7 @@ namespace GSB2
 {
     public partial class ConnexionForm : Form
     {
+        // SB: Constructeur du formulaire de connexion - initialise les composants et teste la connexion à la base de données
         public ConnexionForm()
         {
             InitializeComponent();
@@ -27,8 +28,7 @@ namespace GSB2
             }
         }
 
-
-
+        // SB: Gère le clic sur le bouton de connexion - vérifie les identifiants et redirige vers MainForm si valides
         private void buttonConnexion_Click(object sender, EventArgs e)
         {
             string email = textBoxEmail.Text;
@@ -55,6 +55,7 @@ namespace GSB2
             }
         }
 
+        // SB: Gère le clic sur le bouton de création de compte - redirige vers le formulaire d'inscription
         private void buttonRedirCreat_Click(object sender, EventArgs e)
         {
             RegisterForm newForm = new RegisterForm();

@@ -95,7 +95,7 @@ namespace GSB2.Forms
             var medList = prescriptionDAO.GetMedicinesWithQuantities(editingPrescriptionId.Value);
             foreach (DataGridViewRow dgvRow in dgvMedicines.Rows)
             {
-                var medId = Convert.ToInt32(dgvRow.Cells["colId"].Value);
+                var medId = Convert.ToInt32(dgvRow.Cells["id_medicine"].Value);
                 var match = medList.FirstOrDefault(m => m.Id_medicine == medId);
                 if (match != default)
                 {

@@ -1,123 +1,123 @@
-# GSB2 - Application de Gestion Médicale
+# GSB2 - Application de Gestion Medicale
 
 ![.NET](https://img.shields.io/badge/.NET-8.0-blue)
 ![Platform](https://img.shields.io/badge/Platform-Windows-lightgrey)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-## ?? Description
+## Description
 
-**GSB2** est une application de gestion médicale développée en **C# Windows Forms** (.NET 8.0). Elle permet aux professionnels de santé (médecins et administrateurs) de gérer les patients, les médicaments et les prescriptions médicales.
+**GSB2** est une application de gestion medicale developpee en **C# Windows Forms** (.NET 8.0). Elle permet aux professionnels de sante (medecins et administrateurs) de gerer les patients, les medicaments et les prescriptions medicales.
 
-L'application offre également la possibilité d'**exporter les ordonnances au format PDF** pour une utilisation professionnelle.
+L'application offre egalement la possibilite d'**exporter les ordonnances au format PDF** pour une utilisation professionnelle.
 
 ---
 
-## ? Fonctionnalités
+## Fonctionnalites
 
-### ?? Authentification
-- Connexion sécurisée avec email et mot de passe (hashage SHA-256)
-- Création de compte utilisateur
-- Gestion des rôles (Médecin / Administrateur)
+### Authentification
+- Connexion securisee avec email et mot de passe (hashage SHA-256)
+- Creation de compte utilisateur
+- Gestion des roles (Medecin / Administrateur)
 
-### ?? Gestion des Utilisateurs (Admin)
+### Gestion des Utilisateurs (Admin)
 - Visualiser la liste des utilisateurs
-- Créer, modifier et supprimer des utilisateurs
-- Attribution des rôles (médecin ou administrateur)
+- Creer, modifier et supprimer des utilisateurs
+- Attribution des roles (medecin ou administrateur)
 
-### ?? Gestion des Patients
+### Gestion des Patients
 - Ajouter de nouveaux patients
 - Modifier les informations des patients
 - Supprimer des patients
 - Rechercher et visualiser les patients
 
-### ?? Gestion des Médicaments
-- Catalogue des médicaments avec dosage, molécule et description
-- Ajouter, modifier et supprimer des médicaments
-- Association médicament-prescripteur
+### Gestion des Medicaments
+- Catalogue des medicaments avec dosage, molecule et description
+- Ajouter, modifier et supprimer des medicaments
+- Association medicament-prescripteur
 
-### ?? Gestion des Prescriptions
-- Créer des ordonnances avec plusieurs médicaments et quantités
+### Gestion des Prescriptions
+- Creer des ordonnances avec plusieurs medicaments et quantites
 - Modifier et supprimer des prescriptions
-- Date de validité des prescriptions
+- Date de validite des prescriptions
 - **Export PDF** des ordonnances
 
 ---
 
-## ??? Technologies Utilisées
+## Technologies Utilisees
 
 | Technologie | Version | Description |
 |-------------|---------|-------------|
-| **.NET** | 8.0 | Framework de développement |
+| **.NET** | 8.0 | Framework de developpement |
 | **Windows Forms** | - | Interface graphique |
-| **MySQL** | - | Base de données relationnelle |
+| **MySQL** | - | Base de donnees relationnelle |
 | **MySql.Data** | 9.5.0 | Connecteur MySQL pour .NET |
-| **iText** | 9.4.0 | Génération de fichiers PDF |
+| **iText** | 9.4.0 | Generation de fichiers PDF |
 
 ---
 
-## ?? Structure du Projet
+## Structure du Projet
 
 ```
 GSB2/
-??? GSB2.sln           # Solution Visual Studio
-??? GSB2/
-    ??? Program.cs      # Point d'entrée de l'application
-    ??? GSB2.csproj             # Fichier projet
-    ?
-    ??? DAO/         # Data Access Objects (Accès aux données)
-    ?   ??? Database.cs         # Configuration de la connexion MySQL
-    ?   ??? UserDAO.cs        # Opérations CRUD pour les utilisateurs
-    ?   ??? PatientDAO.cs       # Opérations CRUD pour les patients
-    ?   ??? MedicineDAO.cs      # Opérations CRUD pour les médicaments
-    ?   ??? PrescriptionDAO.cs  # Opérations CRUD pour les prescriptions
-    ?   ??? LiaiMPDAO.cs        # Liaison médicaments-prescriptions
-    ?
-    ??? Models/                 # Modèles de données
-    ?   ??? Users.cs    # Modèle utilisateur
-    ?   ??? Patients.cs         # Modèle patient
-    ?   ??? Medicine.cs      # Modèle médicament
-  ?   ??? Prescription.cs     # Modèle prescription
-    ?   ??? LiaiMP.cs           # Modèle liaison médicament-prescription
-  ?
-    ??? Forms/       # Formulaires Windows Forms
-    ?   ??? ConnexionForm.cs    # Écran de connexion
-    ?   ??? RegisterForm.cs     # Écran d'inscription
-    ?   ??? MainForm.cs # Écran principal / Dashboard
-    ?   ??? PatientsForm.cs     # Gestion des patients
-    ?   ??? MedicinesForm.cs    # Gestion des médicaments
-    ?   ??? PrescriptionsForm.cs# Gestion des prescriptions
-    ?
-    ??? Utils/              # Utilitaires
-   ??? PdfExporter.cs      # Export des ordonnances en PDF
++-- GSB2.sln             # Solution Visual Studio
++-- GSB2/
+    +-- Program.cs              # Point d'entree de l'application
+    +-- GSB2.csproj             # Fichier projet
+    |
+    +-- DAO/      # Data Access Objects (Acces aux donnees)
+    |   +-- Database.cs     # Configuration de la connexion MySQL
+    |   +-- UserDAO.cs     # Operations CRUD pour les utilisateurs
+    |   +-- PatientDAO.cs   # Operations CRUD pour les patients
+    |   +-- MedicineDAO.cs      # Operations CRUD pour les medicaments
+    |   +-- PrescriptionDAO.cs  # Operations CRUD pour les prescriptions
+    |   +-- LiaiMPDAO.cs# Liaison medicaments-prescriptions
+    |
+    +-- Models/  # Modeles de donnees
+ |   +-- Users.cs      # Modele utilisateur
+    |   +-- Patients.cs # Modele patient
+    |   +-- Medicine.cs         # Modele medicament
+    |   +-- Prescription.cs     # Modele prescription
+    |   +-- LiaiMP.cs         # Modele liaison medicament-prescription
+    |
+    +-- Forms/      # Formulaires Windows Forms
+    | +-- ConnexionForm.cs# Ecran de connexion
+    |   +-- RegisterForm.cs     # Ecran d'inscription
+    |   +-- MainForm.cs   # Ecran principal / Dashboard
+    |   +-- PatientsForm.cs     # Gestion des patients
+    |   +-- MedicinesForm.cs    # Gestion des medicaments
+    |   +-- PrescriptionsForm.cs# Gestion des prescriptions
+    |
+    +-- Utils/      # Utilitaires
+        +-- PdfExporter.cs      # Export des ordonnances en PDF
 ```
 
 ---
 
-## ?? Prérequis
+## Prerequis
 
 - **Windows 10/11**
-- **.NET 8.0 SDK** ou supérieur
+- **.NET 8.0 SDK** ou superieur
 - **MySQL Server** (version 5.7+ ou 8.0)
-- **Visual Studio 2022** (recommandé)
+- **Visual Studio 2022** (recommande)
 
 ---
 
-## ?? Installation
+## Installation
 
-### 1. Cloner le dépôt
+### 1. Cloner le depot
 
 ```bash
 git clone https://github.com/Bada-Safwane/GSB_WinForm.git
 cd GSB_WinForm/GSB2
 ```
 
-### 2. Configurer la base de données
+### 2. Configurer la base de donnees
 
-Créez la base de données MySQL en exécutant le script SQL (voir section Base de données ci-dessous).
+Creez la base de donnees MySQL en executant le script SQL (voir section Base de donnees ci-dessous).
 
 ### 3. Configurer la connexion
 
-Modifiez le fichier `DAO/Database.cs` avec vos paramètres de connexion :
+Modifiez le fichier `DAO/Database.cs` avec vos parametres de connexion :
 
 ```csharp
 private readonly string myConnectionString = "server=localhost;uid=root;pwd=votre_mot_de_passe;database=bd_gsb";
@@ -129,7 +129,7 @@ private readonly string myConnectionString = "server=localhost;uid=root;pwd=votr
 dotnet restore
 ```
 
-### 5. Compiler et exécuter
+### 5. Compiler et executer
 
 ```bash
 dotnet build
@@ -140,9 +140,9 @@ Ou ouvrez `GSB2.sln` dans Visual Studio et appuyez sur **F5**.
 
 ---
 
-## ??? Base de Données
+## Base de Donnees
 
-### Schéma de la base de données
+### Schema de la base de donnees
 
 ```sql
 CREATE DATABASE IF NOT EXISTS bd_gsb;
@@ -154,8 +154,8 @@ CREATE TABLE users (
     name VARCHAR(100) NOT NULL,
     firstname VARCHAR(100) NOT NULL,
     email VARCHAR(150) UNIQUE NOT NULL,
-  password VARCHAR(64) NOT NULL, -- SHA-256 hash
-    role BOOLEAN DEFAULT FALSE     -- FALSE = Médecin, TRUE = Admin
+    password VARCHAR(64) NOT NULL, -- SHA-256 hash
+    role BOOLEAN DEFAULT FALSE -- FALSE = Medecin, TRUE = Admin
 );
 
 -- Table des patients
@@ -169,7 +169,7 @@ CREATE TABLE patients (
     FOREIGN KEY (id_users) REFERENCES users(id_users)
 );
 
--- Table des médicaments
+-- Table des medicaments
 CREATE TABLE medicine (
     id_medicine INT PRIMARY KEY AUTO_INCREMENT,
     id_users INT NOT NULL,
@@ -182,7 +182,7 @@ CREATE TABLE medicine (
 
 -- Table des prescriptions
 CREATE TABLE prescription (
-id_prescription INT PRIMARY KEY AUTO_INCREMENT,
+    id_prescription INT PRIMARY KEY AUTO_INCREMENT,
     id_users INT NOT NULL,
     id_patients INT NOT NULL,
     validity DATE NOT NULL,
@@ -190,61 +190,61 @@ id_prescription INT PRIMARY KEY AUTO_INCREMENT,
     FOREIGN KEY (id_patients) REFERENCES patients(id_patients)
 );
 
--- Table de liaison médicaments-prescriptions
+-- Table de liaison medicaments-prescriptions
 CREATE TABLE liai_medicine_prescription (
     id_prescrition INT NOT NULL,
     id_medicine INT NOT NULL,
     quantity INT NOT NULL DEFAULT 1,
     PRIMARY KEY (id_prescrition, id_medicine),
-FOREIGN KEY (id_prescrition) REFERENCES prescription(id_prescription),
+    FOREIGN KEY (id_prescrition) REFERENCES prescription(id_prescription),
     FOREIGN KEY (id_medicine) REFERENCES medicine(id_medicine)
 );
 ```
 
 ---
 
-## ?? Utilisation
+## Utilisation
 
-### Première connexion
+### Premiere connexion
 
 1. Lancez l'application
-2. Créez un compte via le bouton **"Créer un compte"**
+2. Creez un compte via le bouton **"Creer un compte"**
 3. Connectez-vous avec vos identifiants
 
-### Rôles utilisateur
+### Roles utilisateur
 
-| Rôle | Permissions |
+| Role | Permissions |
 |------|-------------|
-| **Médecin** | Gérer patients, médicaments et prescriptions |
+| **Medecin** | Gerer patients, medicaments et prescriptions |
 | **Administrateur** | Toutes les permissions + gestion des utilisateurs |
 
 ---
 
-## ?? Captures d'écran
+## Captures d'ecran
 
-*À venir*
+*A venir*
 
 ---
 
-## ?? Contribution
+## Contribution
 
 Les contributions sont les bienvenues ! Pour contribuer :
 
 1. Forkez le projet
-2. Créez une branche pour votre fonctionnalité (`git checkout -b feature/nouvelle-fonctionnalite`)
-3. Committez vos changements (`git commit -m 'Ajout d'une nouvelle fonctionnalité'`)
+2. Creez une branche pour votre fonctionnalite (`git checkout -b feature/nouvelle-fonctionnalite`)
+3. Committez vos changements (`git commit -m 'Ajout d'une nouvelle fonctionnalite'`)
 4. Poussez vers la branche (`git push origin feature/nouvelle-fonctionnalite`)
 5. Ouvrez une Pull Request
 
 ---
 
-## ?? Licence
+## Licence
 
-Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de détails.
+Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de details.
 
 ---
 
-## ????? Auteur
+## Auteur
 
 **Safwane BADA**
 
@@ -252,6 +252,6 @@ Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de
 
 ---
 
-## ?? Support
+## Support
 
-Pour toute question ou problème, veuillez ouvrir une [issue](https://github.com/Bada-Safwane/GSB_WinForm/issues) sur GitHub.
+Pour toute question ou probleme, veuillez ouvrir une [issue](https://github.com/Bada-Safwane/GSB_WinForm/issues) sur GitHub.

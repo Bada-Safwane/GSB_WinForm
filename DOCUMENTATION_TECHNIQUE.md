@@ -1,17 +1,17 @@
 # Documentation Technique - GSB2
 
-## ?? Table des Matières
+## Table des Matieres
 
 1. [Vue d'ensemble](#1-vue-densemble)
 2. [Architecture du projet](#2-architecture-du-projet)
-3. [Modèle de données](#3-modèle-de-données)
+3. [Modele de donnees](#3-modele-de-donnees)
 4. [Couche DAO (Data Access Objects)](#4-couche-dao-data-access-objects)
-5. [Couche Modèles](#5-couche-modèles)
+5. [Couche Modeles](#5-couche-modeles)
 6. [Couche Interface Utilisateur](#6-couche-interface-utilisateur)
 7. [Utilitaires](#7-utilitaires)
-8. [Sécurité](#8-sécurité)
+8. [Securite](#8-securite)
 9. [Diagrammes](#9-diagrammes)
-10. [Guide de développement](#10-guide-de-développement)
+10. [Guide de developpement](#10-guide-de-developpement)
 
 ---
 
@@ -19,11 +19,11 @@
 
 ### 1.1 Description du projet
 
-GSB2 est une application de bureau Windows Forms développée en C# avec .NET 8.0. Elle est conçue pour la gestion médicale dans un contexte professionnel, permettant la gestion des :
+GSB2 est une application de bureau Windows Forms developpee en C# avec .NET 8.0. Elle est concue pour la gestion medicale dans un contexte professionnel, permettant la gestion des :
 
-- **Utilisateurs** (médecins et administrateurs)
+- **Utilisateurs** (medecins et administrateurs)
 - **Patients** 
-- **Médicaments**
+- **Medicaments**
 - **Prescriptions/Ordonnances**
 
 ### 1.2 Stack technique
@@ -32,8 +32,8 @@ GSB2 est une application de bureau Windows Forms développée en C# avec .NET 8.0.
 |-----------|-------------|---------|
 | Framework | .NET | 8.0 |
 | Interface | Windows Forms | - |
-| Base de données | MySQL | 8.0+ |
-| ORM/Accès données | MySql.Data (ADO.NET) | 9.5.0 |
+| Base de donnees | MySQL | 8.0+ |
+| ORM/Acces donnees | MySql.Data (ADO.NET) | 9.5.0 |
 | Export PDF | iText | 9.4.0 |
 | Cryptographie PDF | itext.bouncy-castle-adapter | 9.4.0 |
 
@@ -63,118 +63,121 @@ GSB2 est une application de bureau Windows Forms développée en C# avec .NET 8.0.
 
 ### 2.1 Pattern architectural
 
-Le projet suit une architecture **3-tiers** simplifiée :
+Le projet suit une architecture **3-tiers** simplifiee :
 
 ```
-???????????????????????????????????????????????????????????????
-?              COUCHE PRÉSENTATION  ?
-? (Windows Forms)           ?
-?  ?????????????????????????????????????????????????????????? ?
-?  ? ConnexionForm? MainForm   ? PatientsForm ?MedicinesForm? ?
-?  ? RegisterForm ?             ?PrescriptionsForm      ? ?
-?  ?????????????????????????????????????????????????????????? ?
-???????????????????????????????????????????????????????????????
-   ?
-         ?
-???????????????????????????????????????????????????????????????
-?           COUCHE MÉTIER      ?
-?     (Models)       ?
-?  ?????????????????????????????????????????????????????????? ?
-?  ?  Users  ? Patients ? Medicine  ? Prescription? LiaiMP  ? ?
-?  ?????????????????????????????????????????????????????????? ?
-???????????????????????????????????????????????????????????????
-         ?
-            ?
-???????????????????????????????????????????????????????????????
-?         COUCHE ACCÈS DONNÉES ?
-?     (DAO)     ?
-?  ?????????????????????????????????????????????????????????  ?
-?  ? UserDAO  ? PatientDAO ? MedicineDAO ? PrescriptionDAO ?  ?
-?  ?  ?      ?             ? LiaiMPDAO    ?  ?
-?  ?????????????????????????????????????????????????????????  ?
-?     ?          ?
-?               ???????????????            ?
-?         ?  Database   ?             ?
-?         ???????????????     ?
-???????????????????????????????????????????????????????????????
-        ?
-            ?
-        ???????????????
-           ?   MySQL     ?
-     ?  Database   ?
-        ???????????????
++-----------------------------------------------+
+|          COUCHE PRESENTATION            |
+|  (Windows Forms)  |
+| +-------------------------------------------+ |
+| | ConnexionForm | MainForm    | PatientsForm| |
+| | RegisterForm  |             | MedicinesForm| |
+| |        |  | PrescriptionsForm| |
+| +-------------------------------------------+ |
++-----------------------------------------------+
+          |
+    v
++-----------------------------------------------+
+|         COUCHE METIER       |
+|   (Models)       |
+| +-------------------------------------------+ |
+| | Users | Patients | Medicine | Prescription | LiaiMP | |
+| +-------------------------------------------+ |
++-----------------------------------------------+
+       |
+          v
++-----------------------------------------------+
+|         COUCHE ACCES DONNEES         |
+|   (DAO)             |
+| +-------------------------------------------+ |
+| | UserDAO | PatientDAO | MedicineDAO |  | |
+| | PrescriptionDAO | LiaiMPDAO |             | |
+| +-------------------------------------------+ |
+|         | |
+|        +----------+           |
+|              | Database |         |
+|      +----------+          |
++-----------------------------------------------+
+          |
+ v
+       +----------+
+       |  MySQL   |
+        | Database |
+      +----------+
 ```
 
 ### 2.2 Structure des dossiers
 
 ```
 GSB2/
-??? DAO/    # Data Access Objects
-?   ??? Database.cs         # Singleton de connexion
-?   ??? UserDAO.cs          # CRUD Utilisateurs
-?   ??? PatientDAO.cs       # CRUD Patients
-?   ??? MedicineDAO.cs      # CRUD Médicaments
-?   ??? PrescriptionDAO.cs  # CRUD Prescriptions
-?   ??? LiaiMPDAO.cs        # CRUD Liaison Med-Presc
-?
-??? Models/              # Entités métier
-?   ??? Users.cs
-?   ??? Patients.cs
-?   ??? Medicine.cs
-?   ??? Prescription.cs
-?   ??? LiaiMP.cs
-?
-??? Forms/        # Interface utilisateur
-?   ??? ConnexionForm.cs    # Login
-?   ??? RegisterForm.cs     # Inscription
-?   ??? MainForm.cs         # Dashboard
-?   ??? PatientsForm.cs     # Gestion patients
-?   ??? MedicinesForm.cs    # Gestion médicaments
-?   ??? PrescriptionsForm.cs# Gestion ordonnances
-?
-??? Utils/        # Utilitaires
-?   ??? PdfExporter.cs      # Export PDF
-?
-??? Program.cs          # Point d'entrée
++-- DAO/    # Data Access Objects
+|   +-- Database.cs         # Singleton de connexion
+|   +-- UserDAO.cs          # CRUD Utilisateurs
+|   +-- PatientDAO.cs    # CRUD Patients
+|   +-- MedicineDAO.cs      # CRUD Medicaments
+|   +-- PrescriptionDAO.cs  # CRUD Prescriptions
+|   +-- LiaiMPDAO.cs     # CRUD Liaison Med-Presc
+|
++-- Models/      # Entites metier
+|   +-- Users.cs
+|   +-- Patients.cs
+|   +-- Medicine.cs
+|   +-- Prescription.cs
+|   +-- LiaiMP.cs
+|
++-- Forms/     # Interface utilisateur
+|   +-- ConnexionForm.cs    # Login
+|+-- RegisterForm.cs     # Inscription
+|   +-- MainForm.cs  # Dashboard
+|   +-- PatientsForm.cs     # Gestion patients
+|   +-- MedicinesForm.cs    # Gestion medicaments
+|   +-- PrescriptionsForm.cs# Gestion ordonnances
+|
++-- Utils/        # Utilitaires
+|   +-- PdfExporter.cs      # Export PDF
+|
++-- Program.cs   # Point d'entree
 ```
 
 ---
 
-## 3. Modèle de données
+## 3. Modele de donnees
 
-### 3.1 Diagramme Entité-Relation (MCD)
+### 3.1 Diagramme Entite-Relation (MCD)
 
 ```
-???????????????         ???????????????         ???????????????
-?   USERS     ?       ?  PATIENTS   ?     ?  MEDICINE   ?
-???????????????  ???????????????  ???????????????
-? id_users PK ???????   ?id_patients  ?   ??????? id_medicine ?
-? name   ?     ?   ?  PK      ?   ?   ?  PK       ?
-? firstname   ?     ????? id_users FK ?   ? ? id_users FK ?????
-? email    ?     ?   ? name        ?   ?     ? names       ?   ?
-? password    ?     ?   ? firstname   ?   ?   ? dosage      ?   ?
-? role    ?     ?   ? age     ?   ?     ? description ?   ?
-???????????????     ?   ? gender  ?   ?? molecule    ?   ?
-   ?   ??????????????? ?     ???????????????   ?
-             ??          ?    ?          ?
-     ??          ?   ?   ?
-     ?   ?????????????????????????????????????     ?
-            ?   ?    PRESCRIPTION       ?     ?
-        ??????????????????????????????????????     ?
-         ?   ? id_prescription PK      ?     ?
-           ????? id_users FK         ?   ?
-             ? id_patients FK       ?     ?
-          ? validity        ?     ?
-      ?????????????????????????????????????     ?
-          ?            ?
-       ?  ?
-     ?????????????????????????????????????     ?
-          ?   LIAI_MEDICINE_PRESCRIPTION      ?     ?
-     ?????????????????????????????????????     ?
-        ? id_prescrition FK PK       ?     ?
-            ? id_medicine FK PK     ???????
-        ? quantity           ?
-        ?????????????????????????????????????
++---------------+         +---------------+         +---------------+
+|    USERS      |       |   PATIENTS    |   |   MEDICINE    |
++---------------+         +---------------+         +---------------+
+| id_users PK   |----+    | id_patients   |    +----| id_medicine   |
+| name   |    |    | PK   |    |    |   PK          |
+| firstname|    +----| id_users FK |    |    | id_users FK   |----+
+| email    |         | name  |    |    | names         |    |
+| password      | | firstname     |    |    | dosage |    |
+| role          |         | age        |  |    | description   |    |
++---------------+         | gender        |    |    | molecule      |    |
+        |          +---------------+    |    +---------------+    |
+   |           |      |           |       |
+      |              |          | |      |
+        |    +-------------------+-------------+           |  |
+        |    |         PRESCRIPTION|           |        |
+        |    +-----------------------------+   |         |        |
+    |    | id_prescription PK          |   |           |        |
+        +----| id_users FK                 |   |           |        |
+             | id_patients FK  |---+    | |
+             | validity      |       |      |
+             +-----------------------------+   |       |
+             |     | |
+         |       |      |
+   +-----------------------------+|             |
+             | LIAI_MEDICINE_PRESCRIPTION  |     |       |
+         +-----------------------------+               |       |
+     | id_prescrition FK PK        |   |             |
+     | id_medicine FK PK           |---------------+   |
+  | quantity        |    |
+        +-----------------------------+    |
+          |
+           +-----------------------------+
 ```
 
 ### 3.2 Description des tables
@@ -184,45 +187,45 @@ GSB2/
 |---------|------|-------------|-------------|
 | id_users | INT | PK, AUTO_INCREMENT | Identifiant unique |
 | name | VARCHAR(100) | NOT NULL | Nom de famille |
-| firstname | VARCHAR(100) | NOT NULL | Prénom |
+| firstname | VARCHAR(100) | NOT NULL | Prenom |
 | email | VARCHAR(150) | UNIQUE, NOT NULL | Adresse email |
-| password | VARCHAR(64) | NOT NULL | Mot de passe hashé SHA-256 |
-| role | BOOLEAN | DEFAULT FALSE | FALSE=Médecin, TRUE=Admin |
+| password | VARCHAR(64) | NOT NULL | Mot de passe hashe SHA-256 |
+| role | BOOLEAN | DEFAULT FALSE | FALSE=Medecin, TRUE=Admin |
 
 #### Table `patients`
 | Colonne | Type | Contraintes | Description |
 |---------|------|-------------|-------------|
 | id_patients | INT | PK, AUTO_INCREMENT | Identifiant unique |
-| id_users | INT | FK ? users | Médecin référent |
+| id_users | INT | FK -> users | Medecin referent |
 | name | VARCHAR(100) | NOT NULL | Nom du patient |
-| firstname | VARCHAR(100) | NOT NULL | Prénom du patient |
-| age | INT | NOT NULL | Âge du patient |
+| firstname | VARCHAR(100) | NOT NULL | Prenom du patient |
+| age | INT | NOT NULL | Age du patient |
 | gender | VARCHAR(20) | NOT NULL | Genre du patient |
 
 #### Table `medicine`
 | Colonne | Type | Contraintes | Description |
 |---------|------|-------------|-------------|
 | id_medicine | INT | PK, AUTO_INCREMENT | Identifiant unique |
-| id_users | INT | FK ? users | Utilisateur créateur |
-| names | VARCHAR(150) | NOT NULL | Nom du médicament |
+| id_users | INT | FK -> users | Utilisateur createur |
+| names | VARCHAR(150) | NOT NULL | Nom du medicament |
 | dosage | VARCHAR(100) | - | Dosage (ex: 500mg) |
-| description | TEXT | - | Description détaillée |
-| molecule | VARCHAR(150) | - | Molécule active |
+| description | TEXT | - | Description detaillee |
+| molecule | VARCHAR(150) | - | Molecule active |
 
 #### Table `prescription`
 | Colonne | Type | Contraintes | Description |
 |---------|------|-------------|-------------|
 | id_prescription | INT | PK, AUTO_INCREMENT | Identifiant unique |
-| id_users | INT | FK ? users | Médecin prescripteur |
-| id_patients | INT | FK ? patients | Patient concerné |
-| validity | DATE | NOT NULL | Date de validité |
+| id_users | INT | FK -> users | Medecin prescripteur |
+| id_patients | INT | FK -> patients | Patient concerne |
+| validity | DATE | NOT NULL | Date de validite |
 
 #### Table `liai_medicine_prescription`
 | Colonne | Type | Contraintes | Description |
 |---------|------|-------------|-------------|
-| id_prescrition | INT | PK, FK ? prescription | ID prescription |
-| id_medicine | INT | PK, FK ? medicine | ID médicament |
-| quantity | INT | DEFAULT 1 | Quantité prescrite |
+| id_prescrition | INT | PK, FK -> prescription | ID prescription |
+| id_medicine | INT | PK, FK -> medicine | ID medicament |
+| quantity | INT | DEFAULT 1 | Quantite prescrite |
 
 ---
 
@@ -230,7 +233,7 @@ GSB2/
 
 ### 4.1 Classe Database
 
-Gère la connexion à la base de données MySQL.
+Gere la connexion a la base de donnees MySQL.
 
 ```csharp
 public class Database
@@ -241,23 +244,23 @@ public class Database
     public MySqlConnection GetConnection()
     {
         return new MySqlConnection(myConnectionString);
-    }
+}
 }
 ```
 
-**Configuration** : Modifier la chaîne de connexion selon l'environnement.
+**Configuration** : Modifier la chaine de connexion selon l'environnement.
 
 ### 4.2 UserDAO
 
-Gestion des opérations CRUD pour les utilisateurs.
+Gestion des operations CRUD pour les utilisateurs.
 
-| Méthode | Paramètres | Retour | Description |
+| Methode | Parametres | Retour | Description |
 |---------|------------|--------|-------------|
 | `GetUsers` | email, password | `Users?` | Authentification utilisateur |
 | `Register` | email, password, name, firstname | `bool` | Inscription utilisateur |
-| `CreateUser` | email, password, name, firstname, role | `bool` | Création par admin |
+| `CreateUser` | email, password, name, firstname, role | `bool` | Creation par admin |
 | `GetAllUsers` | - | `List<Users>` | Liste tous les utilisateurs |
-| `UpdateUser` | Users | `bool` | Mise à jour utilisateur |
+| `UpdateUser` | Users | `bool` | Mise a jour utilisateur |
 | `DeleteUser` | userId | `bool` | Suppression utilisateur |
 
 **Exemple d'utilisation :**
@@ -266,63 +269,63 @@ var userDao = new UserDAO();
 Users user = userDao.GetUsers("email@example.com", "password123");
 if (user != null)
 {
-    // Utilisateur authentifié
+  // Utilisateur authentifie
 }
 ```
 
 ### 4.3 PatientDAO
 
-| Méthode | Paramètres | Retour | Description |
+| Methode | Parametres | Retour | Description |
 |---------|------------|--------|-------------|
-| `GetPatientById` | id_patient | `Patients?` | Récupère un patient |
-| `CreatePatient` | id_users, name, age, firstname, gender | `bool` | Crée un patient |
-| `Insert` | Patients | `bool` | Insère un patient |
-| `GetAllPatients` | - | `List<dynamic>` | Liste avec infos médecin |
+| `GetPatientById` | id_patient | `Patients?` | Recupere un patient |
+| `CreatePatient` | id_users, name, age, firstname, gender | `bool` | Cree un patient |
+| `Insert` | Patients | `bool` | Insere un patient |
+| `GetAllPatients` | - | `List<dynamic>` | Liste avec infos medecin |
 | `GetPatientsForComboBox` | - | `List<Patients>` | Pour ComboBox |
-| `UpdatePatient` | Patients | `bool` | Mise à jour |
+| `UpdatePatient` | Patients | `bool` | Mise a jour |
 | `DeletePatient` | id_patient | `bool` | Suppression |
 
 ### 4.4 MedicineDAO
 
-| Méthode | Paramètres | Retour | Description |
+| Methode | Parametres | Retour | Description |
 |---------|------------|--------|-------------|
 | `GetAll` | - | `List<dynamic>` | Liste avec utilisateur |
 | `GetAllMedicines` | - | `List<Medicine>` | Liste simple |
-| `GetById` | id | `Medicine?` | Récupère par ID |
-| `Insert` | Medicine | `bool` | Ajoute médicament |
-| `Update` | Medicine | `bool` | Mise à jour |
+| `GetById` | id | `Medicine?` | Recupere par ID |
+| `Insert` | Medicine | `bool` | Ajoute medicament |
+| `Update` | Medicine | `bool` | Mise a jour |
 | `Delete` | id | `bool` | Suppression |
 
 ### 4.5 PrescriptionDAO
 
-| Méthode | Paramètres | Retour | Description |
+| Methode | Parametres | Retour | Description |
 |---------|------------|--------|-------------|
-| `GetPrescriptionById` | id_prescription | `Prescription?` | Récupère prescription |
-| `CreatePrescription` | Prescription | `bool` | Création simple |
-| `CreatePrescriptionWithMedicines` | Prescription, List<(int, int)> | `bool` | Création avec médicaments |
-| `GetAllPrescriptions` | - | `List<dynamic>` | Liste complète |
-| `GetMedicinesWithQuantities` | id_prescription | `List<(int, int)>` | Médicaments d'une prescription |
-| `UpdatePrescription` | id, validity, medicines | `bool` | Mise à jour complète |
+| `GetPrescriptionById` | id_prescription | `Prescription?` | Recupere prescription |
+| `CreatePrescription` | Prescription | `bool` | Creation simple |
+| `CreatePrescriptionWithMedicines` | Prescription, List<(int, int)> | `bool` | Creation avec medicaments |
+| `GetAllPrescriptions` | - | `List<dynamic>` | Liste complete |
+| `GetMedicinesWithQuantities` | id_prescription | `List<(int, int)>` | Medicaments d'une prescription |
+| `UpdatePrescription` | id, validity, medicines | `bool` | Mise a jour complete |
 | `DeletePrescription` | id_prescription | `bool` | Suppression avec cascade |
 
-**Note** : Les opérations de création/mise à jour/suppression utilisent des **transactions** pour garantir l'intégrité des données.
+**Note** : Les operations de creation/mise a jour/suppression utilisent des **transactions** pour garantir l'integrite des donnees.
 
 ### 4.6 LiaiMPDAO
 
-Gère la table de liaison médicaments-prescriptions.
+Gere la table de liaison medicaments-prescriptions.
 
-| Méthode | Paramètres | Retour | Description |
+| Methode | Parametres | Retour | Description |
 |---------|------------|--------|-------------|
 | `GetAll` | - | `List<LiaiMP>` | Toutes les liaisons |
-| `GetByPrescriptionId` | id_prescription | `List<LiaiMP>` | Médicaments d'une prescription |
-| `GetByMedicineId` | id_medicine | `List<LiaiMP>` | Prescriptions d'un médicament |
+| `GetByPrescriptionId` | id_prescription | `List<LiaiMP>` | Medicaments d'une prescription |
+| `GetByMedicineId` | id_medicine | `List<LiaiMP>` | Prescriptions d'un medicament |
 | `Insert` | LiaiMP | `bool` | Ajoute une liaison |
 | `Delete` | id_prescription, id_medicine | `bool` | Supprime une liaison |
 | `DeleteByPrescriptionId` | id_prescription | `bool` | Supprime toutes les liaisons |
 
 ---
 
-## 5. Couche Modèles
+## 5. Couche Modeles
 
 ### 5.1 Classe Users
 
@@ -332,9 +335,9 @@ public class Users
     public int Id_Users { get; set; }
     public string Firstname { get; set; }
     public string Name { get; set; }
- public string Email { get; set; }
+    public string Email { get; set; }
     public string Password { get; set; }
-    public bool Role { get; set; }  // false = Médecin, true = Admin
+    public bool Role { get; set; }  // false = Medecin, true = Admin
 }
 ```
 
@@ -344,8 +347,8 @@ public class Users
 public class Patients
 {
     public int Id_Patients { get; set; }
-    public int Id_Users { get; set; }      // FK vers médecin référent
-  public string Name { get; set; }
+    public int Id_Users { get; set; }      // FK vers medecin referent
+    public string Name { get; set; }
     public int Age { get; set; }
     public string Firstname { get; set; }
     public string Gender { get; set; }
@@ -358,7 +361,7 @@ public class Patients
 public class Medicine
 {
     public int Id_Medicine { get; set; }
-    public int Id_Users { get; set; }      // FK vers créateur
+    public int Id_Users { get; set; }      // FK vers createur
     public string Dosage { get; set; }
     public string Names { get; set; }
     public string Description { get; set; }
@@ -372,9 +375,9 @@ public class Medicine
 public class Prescription
 {
     public int Id_prescription { get; set; }
-    public int Id_users { get; set; }       // FK vers médecin
+ public int Id_users { get; set; }       // FK vers medecin
     public int Id_patients { get; set; }    // FK vers patient
-    public string Validity { get; set; }    // Date de validité
+    public string Validity { get; set; }    // Date de validite
 }
 ```
 
@@ -385,7 +388,7 @@ public class LiaiMP
 {
     public int Id_medicine { get; set; }
     public int Id_prescription { get; set; }
-    public int Quantity { get; set; }
+  public int Quantity { get; set; }
 }
 ```
 
@@ -396,55 +399,55 @@ public class LiaiMP
 ### 6.1 Flux de navigation
 
 ```
-????????????????????
-?  ConnexionForm   ?????????????????????????????????????
-?  (Login)       ?     ?
-????????????????????    ?
-   ?    ?
-    ???????????         ?
- ?         ?   ?
-    ?    ?       ?
-??????????  ???????????????          ?
-?Register?  ?MainForm   ??????????????????????????????
-?  Form  ?  ? (Dashboard) ?   ?
-??????????  ???????????????       ?
-                   ?      ?
-    ???????????????????????????     ?
-      ?      ?            ? ?
-      ?         ?            ?        ?
-???????????? ???????????? ?????????????????   ?
-? Patients ? ?Medicines ? ? Prescriptions ?     ?
-?   Form   ? ?   Form   ? ?     Form      ?            ?
-???????????? ???????????? ?????????????????    ?
-          ?
-        [Déconnexion] ?????????????
++------------------+
+|  ConnexionForm   |---------------------------+
+|  (Login)         |          |
++------------------+  |
+        | |
+    +---+---+    |
+    |       |    |
+ v       v   |
++--------+ +-----------+      |
+|Register| | MainForm  |---------------------->|
+|  Form  | | (Dashboard)| |
++--------+ +-----------+        |
+              |    |
+    +-----------+-----------+  |
+    |     | |         |
+    v         v           v |
++----------+ +----------+ +---------------+    |
+| Patients | | Medicines| | Prescriptions |    |
+|   Form   | |   Form   | |     Form      ||
++----------+ +----------+ +---------------+    |
+        |
+       [Deconnexion] ---------+
 ```
 
 ### 6.2 ConnexionForm
 
-**Responsabilités :**
+**Responsabilites :**
 - Authentification des utilisateurs
-- Redirection vers MainForm si succès
+- Redirection vers MainForm si succes
 - Lien vers RegisterForm pour inscription
 
-**Événements principaux :**
-- `buttonConnexion_Click` : Vérifie les identifiants
+**Evenements principaux :**
+- `buttonConnexion_Click` : Verifie les identifiants
 - `buttonRedirCreat_Click` : Ouvre le formulaire d'inscription
 
 ### 6.3 MainForm
 
-**Responsabilités :**
-- Dashboard principal après connexion
+**Responsabilites :**
+- Dashboard principal apres connexion
 - Affichage des informations utilisateur
 - Navigation vers les autres modules
 - Gestion des utilisateurs (admin uniquement)
 
 **Composants :**
 - `dgvUsers` : DataGridView liste des utilisateurs (admin)
-- Champs d'édition : nom, prénom, email, rôle
-- Boutons de navigation : Patients, Médicaments, Prescriptions
+- Champs d'edition : nom, prenom, email, role
+- Boutons de navigation : Patients, Medicaments, Prescriptions
 
-**Fonctionnalités conditionnelles :**
+**Fonctionnalites conditionnelles :**
 ```csharp
 // Bouton suppression visible uniquement pour les admins
 btnDeleteUser.Visible = connectedUser.Role;
@@ -460,7 +463,7 @@ if (connectedUser.Role)
 ### 6.4 PatientsForm, MedicinesForm, PrescriptionsForm
 
 Structure commune :
-- DataGridView pour afficher les données
+- DataGridView pour afficher les donnees
 - Formulaire de saisie/modification
 - Boutons CRUD (Nouveau, Enregistrer, Supprimer)
 - Bouton Retour vers MainForm
@@ -477,42 +480,42 @@ Classe statique pour l'export des ordonnances au format PDF.
 ```csharp
 public static void ExportPrescription(
     Prescription presc,
-  Patients patient,
+    Patients patient,
     Users doctor,
     List<(Medicine med, int quantity)> meds)
 ```
 
-**Fonctionnalités :**
-- Dialogue de sauvegarde avec nom par défaut
-- Génération PDF avec iText 9
-- Informations patient/médecin/date
-- Tableau des médicaments avec quantités
+**Fonctionnalites :**
+- Dialogue de sauvegarde avec nom par defaut
+- Generation PDF avec iText 9
+- Informations patient/medecin/date
+- Tableau des medicaments avec quantites
 - Zone de signature
-- Ouverture automatique du PDF généré
+- Ouverture automatique du PDF genere
 
-**Dépendances NuGet :**
+**Dependances NuGet :**
 - `iText` (9.4.0)
 - `itext.bouncy-castle-adapter` (9.4.0)
 
 ---
 
-## 8. Sécurité
+## 8. Securite
 
 ### 8.1 Hashage des mots de passe
 
-Les mots de passe sont hashés en **SHA-256** côté base de données :
+Les mots de passe sont hashes en **SHA-256** cote base de donnees :
 
 ```sql
 -- Insertion
 INSERT INTO users (password) VALUES (SHA2(@password, 256));
 
--- Vérification
+-- Verification
 SELECT * FROM users WHERE password = SHA2(@password, 256);
 ```
 
 ### 8.2 Protection contre les injections SQL
 
-Utilisation systématique de **requêtes paramétrées** :
+Utilisation systematique de **requetes parametrees** :
 
 ```csharp
 MySqlCommand cmd = new MySqlCommand(
@@ -520,112 +523,113 @@ MySqlCommand cmd = new MySqlCommand(
 cmd.Parameters.AddWithValue("@email", email);
 ```
 
-### 8.3 Gestion des rôles
+### 8.3 Gestion des roles
 
-| Rôle | Valeur | Permissions |
+| Role | Valeur | Permissions |
 |------|--------|-------------|
-| Médecin | `false` | Patients, Médicaments, Prescriptions |
+| Medecin | `false` | Patients, Medicaments, Prescriptions |
 | Administrateur | `true` | Tout + Gestion utilisateurs |
 
 ---
 
 ## 9. Diagrammes
 
-### 9.1 Diagramme de classes simplifié
+### 9.1 Diagramme de classes simplifie
 
 ```
-???????????????????????????????????????????????????????????????????
-?       <<DAO>>           ?
-???????????????????????????????????????????????????????????????????
-? ????????????  ??????????????  ???????????????  ???????????????  ?
-? ? UserDAO  ?  ? PatientDAO ?  ? MedicineDAO ?  ?Prescription ?  ?
-? ?       ?  ?      ?  ?  ?  ?    DAO      ?  ?
-? ????????????  ?????????????????????????????  ???????????????  ?
-?      ?              ?        ?          ?    ?
-?      ??????????????????????????????????????????????????         ?
-?      ?        ?
-?    ???????????????        ?
-?          ?  Database   ?     ?
-?        ??????????????? ?
-???????????????????????????????????????????????????????????????????
-                    ?
-            ?
-???????????????????????????????????????????????????????????????????
-?      <<Models>>            ?
-???????????????????????????????????????????????????????????????????
-?  ???????????  ????????????  ?????????????  ???????????????????  ?
-?  ?  Users  ?  ? Patients ?  ? Medicine  ?  ?   Prescription  ?  ?
-?  ???????????  ????????????  ?????????????  ???????????????????  ?
-?          ?   ?
-?   ???????????????   ?
-?      ?   LiaiMP    ?        ?
-?     ???????????????   ?
-???????????????????????????????????????????????????????????????????
++-----------------------------------------------------+
+|       <<DAO>>                 |
++-----------------------------------------------------+
+| +----------+ +------------+ +-------------+ +------+|
+| | UserDAO  | | PatientDAO | | MedicineDAO | |Presc-||
+| |          | |        | |        | |DAO   ||
+| +----------+ +------------+ +-------------+ +------+|
+|      ||       | |     |
+|      +------------+--------------+------------+ |
+|  |   |
+|               +----------+        |
+|        | Database |        |
+|       +----------+        |
++-----------------------------------------------------+
+      |
+           v
++-----------------------------------------------------+
+|                   <<Models>>         |
++-----------------------------------------------------+
+| +---------+ +----------+ +-----------+ +-----------+|
+| |  Users  | | Patients | | Medicine  | |Prescription||
+| +---------+ +----------+ +-----------+ +-----------+|
+|      |        |
+|    +---------+   |
+|             | LiaiMP  |  |
+|      +---------+  |
++-----------------------------------------------------+
 ```
 
-### 9.2 Diagramme de séquence - Authentification
+### 9.2 Diagramme de sequence - Authentification
 
 ```
-???????????       ????????????????? ???????????       ??????????
-?  User   ?       ? ConnexionForm ?     ? UserDAO ?       ? MySQL  ?
-???????????       ?????????????????       ???????????       ??????????
-     ?    ?                 ?            ?
-     ? Saisie email/mdp   ?         ?       ?
-     ????????????????????>?   ?        ?
-     ?          ?        ?          ?
-     ?        ? GetUsers(email,pw) ?         ?
-     ?       ????????????????????>?        ?
-     ?             ?         ?      ?
-     ?                 ?     ?  SELECT avec     ?
-     ?         ?   ?  SHA2(password)  ?
-     ?         ?        ??????????????????>?
-     ?             ? ?           ?
-     ?        ?     ????????????????????
-     ?      ?         ?   ResultSet      ?
-  ?      ??????????????????????           ?
-     ?    ?    Users object    ?    ?
-     ?       ?          ?      ?
-?    Redirection     ?       ?     ?
-     ?  vers MainForm     ?    ?         ?
-     ??????????????????????           ?     ?
-     ?      ?             ?      ?
++---------+       +---------------+       +---------+       +--------+
+|  User   |       | ConnexionForm |       | UserDAO |       | MySQL  |
++---------+       +---------------+       +---------+ +--------+
+     |       |     |            |
+     | Saisie email/mdp   |               |   |
+     |------------------->|                 |     |
+     |      |       |   |
+     |          | GetUsers(email,pw) |         |
+     |            |------------------->|        |
+     |         |         |        |
+     ||            | SELECT avec     |
+     |         |   | SHA2(password)  |
+     |  |           |---------------->|
+     ||       |      |
+     |           |       |<----------------|
+     |        |  |   ResultSet     |
+     |     |<-------------------|   |
+   |     |    Users object    |      |
+     |           |          |         |
+     |    Redirection     |        |      |
+     |  vers MainForm     |    |     |
+     |<-------------------|      |    |
+     |      |         |        |
 ```
+
 
 ---
 
-## 10. Guide de développement
+## 10. Guide de developpement
 
-### 10.1 Ajouter une nouvelle entité
+### 10.1 Ajouter une nouvelle entite
 
-1. **Créer le modèle** dans `Models/`
-2. **Créer le DAO** dans `DAO/`
-3. **Créer le formulaire** dans `Forms/`
+1. **Creer le modele** dans `Models/`
+2. **Creer le DAO** dans `DAO/`
+3. **Creer le formulaire** dans `Forms/`
 4. **Ajouter la navigation** depuis `MainForm`
 
 ### 10.2 Conventions de nommage
 
-| Élément | Convention | Exemple |
+| Element | Convention | Exemple |
 |---------|------------|---------|
 | Classes | PascalCase | `UserDAO`, `PatientDAO` |
-| Méthodes | PascalCase | `GetAllUsers()` |
+| Methodes | PascalCase | `GetAllUsers()` |
 | Variables | camelCase | `connectedUser` |
-| Propriétés | PascalCase | `Id_Users` |
-| Contrôles Forms | préfixe + nom | `btnSave`, `txtEmail`, `dgvUsers` |
+| Proprietes | PascalCase | `Id_Users` |
+| Controles Forms | prefixe + nom | `btnSave`, `txtEmail`, `dgvUsers` |
 
 ### 10.3 Gestion des erreurs
 
-Pattern utilisé dans les DAO :
+Pattern utilise dans les DAO :
 
 ```csharp
 try
 {
     connection.Open();
-    // ... opérations
+    // ... operations
 }
 catch (Exception ex)
 {
     MessageBox.Show($"Erreur : {ex.Message}");
-    return false; // ou null
+ return false; // ou null
 }
 ```
 
@@ -633,18 +637,18 @@ catch (Exception ex)
 
 Pour tester l'application :
 
-1. Créer un utilisateur admin via script SQL :
+1. Creer un utilisateur admin via script SQL :
 ```sql
 INSERT INTO users (name, firstname, email, password, role) 
 VALUES ('Admin', 'Test', 'admin@test.com', SHA2('admin123', 256), TRUE);
 ```
 
 2. Se connecter avec ces identifiants
-3. Créer des données de test via l'interface
+3. Creer des donnees de test via l'interface
 
 ---
 
-## ?? Changelog
+## Changelog
 
 | Version | Date | Description |
 |---------|------|-------------|
@@ -652,7 +656,7 @@ VALUES ('Admin', 'Test', 'admin@test.com', SHA2('admin123', 256), TRUE);
 
 ---
 
-## ?? Références
+## References
 
 - [Documentation .NET 8.0](https://learn.microsoft.com/dotnet/)
 - [MySQL Connector/NET](https://dev.mysql.com/doc/connector-net/en/)

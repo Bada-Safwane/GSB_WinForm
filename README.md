@@ -113,7 +113,13 @@ cd GSB_WinForm/GSB2
 
 ### 2. Configurer la base de donnees
 
-Creez la base de donnees MySQL en executant le script SQL (voir section Base de donnees ci-dessous).
+Importez le fichier dump SQL present dans le repository :
+
+```bash
+mysql -u root -p < dump-bd_gsb-202512101546.sql
+```
+
+Ou via phpMyAdmin / MySQL Workbench : importez le fichier `dump-bd_gsb-202512101546.sql` situe a la racine du projet.
 
 ### 3. Configurer la connexion
 

@@ -113,13 +113,18 @@ cd GSB_WinForm/GSB2
 
 ### 2. Configurer la base de donnees
 
-Importez le fichier dump SQL present dans le repository :
+Importez le fichier dump SQL present dans le repository.
 
+**Via DBeaver :**
+1. Ouvrez DBeaver et connectez-vous a votre serveur MySQL
+2. Clic droit sur votre connexion > **Outils** > **Executer un script SQL**
+3. Selectionnez le fichier `dump-bd_gsb-202512101546.sql` situe a la racine du projet
+4. Executez le script
+
+**Via ligne de commande :**
 ```bash
 mysql -u root -p < dump-bd_gsb-202512101546.sql
 ```
-
-Ou via phpMyAdmin / MySQL Workbench : importez le fichier `dump-bd_gsb-202512101546.sql` situe a la racine du projet.
 
 ### 3. Configurer la connexion
 

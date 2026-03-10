@@ -65,12 +65,60 @@ namespace GSB2.Forms
         {
             try
             {
+                // Validation des champs vides
+                if (string.IsNullOrWhiteSpace(txtFirstname.Text))
+                {
+                    MessageBox.Show("Veuillez saisir un prénom.", "Champ requis", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtFirstname.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txtName.Text))
+                {
+                    MessageBox.Show("Veuillez saisir un nom.", "Champ requis", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtName.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txtAge.Text))
+                {
+                    MessageBox.Show("Veuillez saisir un âge.", "Champ requis", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtAge.Focus();
+                    return;
+                }
+
+                // Validation de l'âge : doit être un entier valide
+                if (!int.TryParse(txtAge.Text.Trim(), out int age))
+                {
+                    MessageBox.Show("L'âge doit être un nombre entier valide.", "Âge invalide", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtAge.Focus();
+                    txtAge.SelectAll();
+                    return;
+                }
+
+                // Validation de la plage d'âge (0-150)
+                if (age < 0 || age > 150)
+                {
+                    MessageBox.Show("L'âge doit être compris entre 0 et 150 ans.", "Âge invalide", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtAge.Focus();
+                    txtAge.SelectAll();
+                    return;
+                }
+
+                // Validation du genre
+                if (cmbGender.SelectedItem == null)
+                {
+                    MessageBox.Show("Veuillez sélectionner un genre.", "Champ requis", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cmbGender.Focus();
+                    return;
+                }
+
                 Patients patient = new Patients
                 {
                     Id_Users = currentUser.Id_Users, // lié à l'utilisateur connecté
-                    Firstname = txtFirstname.Text,
-                    Name = txtName.Text,
-                    Age = int.Parse(txtAge.Text),
+                    Firstname = txtFirstname.Text.Trim(),
+                    Name = txtName.Text.Trim(),
+                    Age = age,
                     Gender = cmbGender.SelectedItem.ToString()
                 };
 
@@ -85,7 +133,7 @@ namespace GSB2.Forms
                 }
                 else
                 {
-                    MessageBox.Show("❌ Erreur lors de l’ajout du patient.");
+                    MessageBox.Show("❌ Erreur lors de l'ajout du patient.");
                 }
             }
             catch (Exception ex)

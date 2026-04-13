@@ -39,11 +39,11 @@ namespace GSB2.Forms
             pnlFormRight = new Panel();
             labelMedicines = new Label();
             dgvMedicines = new DataGridView();
-            BtnSave = new Button();
             dataGridViewCheckBoxColumn1 = new DataGridViewCheckBoxColumn();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            BtnSave = new Button();
             pnlSidebar.SuspendLayout();
             pnlHeader.SuspendLayout();
             pnlHeaderButtons.SuspendLayout();
@@ -130,7 +130,7 @@ namespace GSB2.Forms
             Title_label.Location = new Point(43, 33);
             Title_label.Margin = new Padding(4, 0, 4, 0);
             Title_label.Name = "Title_label";
-            Title_label.Size = new Size(500, 67);
+            Title_label.Size = new Size(455, 67);
             Title_label.TabIndex = 0;
             Title_label.Text = "💊 Gestion des prescriptions";
             Title_label.TextAlign = ContentAlignment.MiddleLeft;
@@ -156,7 +156,7 @@ namespace GSB2.Forms
             BtnExportPdf.FlatStyle = FlatStyle.Flat;
             BtnExportPdf.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             BtnExportPdf.ForeColor = Color.White;
-            BtnExportPdf.Location = new Point(0, 0);
+            BtnExportPdf.Location = new Point(13, 0);
             BtnExportPdf.Margin = new Padding(4, 5, 4, 5);
             BtnExportPdf.Name = "BtnExportPdf";
             BtnExportPdf.Size = new Size(193, 67);
@@ -173,7 +173,7 @@ namespace GSB2.Forms
             BtnDelete.FlatStyle = FlatStyle.Flat;
             BtnDelete.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             BtnDelete.ForeColor = Color.White;
-            BtnDelete.Location = new Point(214, 0);
+            BtnDelete.Location = new Point(225, 0);
             BtnDelete.Margin = new Padding(4, 5, 4, 5);
             BtnDelete.Name = "BtnDelete";
             BtnDelete.Size = new Size(193, 67);
@@ -190,7 +190,7 @@ namespace GSB2.Forms
             BtnAdd.FlatStyle = FlatStyle.Flat;
             BtnAdd.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             BtnAdd.ForeColor = Color.White;
-            BtnAdd.Location = new Point(429, 0);
+            BtnAdd.Location = new Point(437, 0);
             BtnAdd.Margin = new Padding(4, 5, 4, 5);
             BtnAdd.Name = "BtnAdd";
             BtnAdd.Size = new Size(193, 67);
@@ -207,7 +207,7 @@ namespace GSB2.Forms
             BtnRefresh.FlatStyle = FlatStyle.Flat;
             BtnRefresh.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             BtnRefresh.ForeColor = Color.White;
-            BtnRefresh.Location = new Point(643, 0);
+            BtnRefresh.Location = new Point(650, 0);
             BtnRefresh.Margin = new Padding(4, 5, 4, 5);
             BtnRefresh.Name = "BtnRefresh";
             BtnRefresh.Size = new Size(193, 67);
@@ -362,23 +362,6 @@ namespace GSB2.Forms
             dgvMedicines.Size = new Size(643, 208);
             dgvMedicines.TabIndex = 1;
             // 
-            // BtnSave
-            // 
-            BtnSave.BackColor = Color.FromArgb(46, 204, 113);
-            BtnSave.Cursor = Cursors.Hand;
-            BtnSave.FlatAppearance.BorderSize = 0;
-            BtnSave.FlatStyle = FlatStyle.Flat;
-            BtnSave.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            BtnSave.ForeColor = Color.White;
-            BtnSave.Location = new Point(1000, 317);
-            BtnSave.Margin = new Padding(4, 5, 4, 5);
-            BtnSave.Name = "BtnSave";
-            BtnSave.Size = new Size(229, 67);
-            BtnSave.TabIndex = 2;
-            BtnSave.Text = "💾 Enregistrer";
-            BtnSave.UseVisualStyleBackColor = false;
-            BtnSave.Click += BtnSave_Click;
-            // 
             // dataGridViewCheckBoxColumn1
             // 
             dataGridViewCheckBoxColumn1.MinimumWidth = 8;
@@ -398,6 +381,23 @@ namespace GSB2.Forms
             // 
             dataGridViewTextBoxColumn3.MinimumWidth = 8;
             dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // BtnSave
+            // 
+            BtnSave.BackColor = Color.FromArgb(46, 204, 113);
+            BtnSave.Cursor = Cursors.Hand;
+            BtnSave.FlatAppearance.BorderSize = 0;
+            BtnSave.FlatStyle = FlatStyle.Flat;
+            BtnSave.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            BtnSave.ForeColor = Color.White;
+            BtnSave.Location = new Point(1000, 317);
+            BtnSave.Margin = new Padding(4, 5, 4, 5);
+            BtnSave.Name = "BtnSave";
+            BtnSave.Size = new Size(229, 67);
+            BtnSave.TabIndex = 2;
+            BtnSave.Text = "💾 Enregistrer";
+            BtnSave.UseVisualStyleBackColor = false;
+            BtnSave.Click += BtnSave_Click;
             // 
             // PrescriptionsForm
             // 

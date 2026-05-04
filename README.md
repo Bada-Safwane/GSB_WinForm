@@ -97,7 +97,7 @@ GSB2/
 
 - **Windows 10/11**
 - **.NET 8.0 SDK** ou superieur
-- **MySQL Server** (version 5.7+ ou 8.0)
+- **Docker Desktop** (pour la base de donnees)
 - **Visual Studio 2022** (recommande)
 
 ---
@@ -111,27 +111,29 @@ git clone https://github.com/Bada-Safwane/GSB_WinForm.git
 cd GSB_WinForm/GSB2
 ```
 
-### 2. Configurer la base de donnees
+### 2. Lancer la base de donnees avec Docker
 
-Importez le fichier dump SQL present dans le repository.
+Le projet inclut un `docker-compose.yml` qui configure automatiquement MySQL et phpMyAdmin, et importe le dump SQL au demarrage.
 
-**Via DBeaver :**
-1. Ouvrez DBeaver et connectez-vous a votre serveur MySQL
-2. Clic droit sur votre connexion > **Outils** > **Executer un script SQL**
-3. Selectionnez le fichier `dump-bd_gsb-202512101546.sql` situe a la racine du projet
-4. Executez le script
-
-**Via ligne de commande :**
 ```bash
-mysql -u root -p < dump-bd_gsb-202512101546.sql
+docker compose up -d
 ```
+
+| Service | URL / Port | Description |
+|---------|-----------|-------------|
+| MySQL | `localhost:3306` | Base de donnees |
+| phpMyAdmin | http://localhost:8080 | Interface d'administration |
+
+Identifiants MySQL : `root` / `root` — Base : `bd_gsb`
+
+> La base de donnees est automatiquement initialisee avec le dump `dump-bd_gsb-202512101546.sql` au premier demarrage.
 
 ### 3. Configurer la connexion
 
-Modifiez le fichier `DAO/Database.cs` avec vos parametres de connexion :
+La connexion dans `DAO/Database.cs` est deja configuree pour Docker :
 
 ```csharp
-private readonly string myConnectionString = "server=localhost;uid=root;pwd=votre_mot_de_passe;database=bd_gsb";
+private readonly string myConnectionString = "server=localhost;uid=root;pwd=root;database=bd_gsb";
 ```
 
 ### 4. Restaurer les packages NuGet
@@ -148,6 +150,12 @@ dotnet run
 ```
 
 Ou ouvrez `GSB2.sln` dans Visual Studio et appuyez sur **F5**.
+
+### Arreter les conteneurs
+
+```bash
+docker compose down
+```
 
 ---
 

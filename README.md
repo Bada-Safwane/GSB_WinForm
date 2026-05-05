@@ -108,7 +108,6 @@ GSB2/
 
 ```bash
 git clone https://github.com/Bada-Safwane/GSB_WinForm.git
-cd GSB_WinForm/GSB2
 ```
 
 ### 2. Lancer la base de donnees avec Docker
@@ -124,7 +123,7 @@ docker compose up -d
 | MySQL | `localhost:3306` | Base de donnees |
 | phpMyAdmin | http://localhost:8080 | Interface d'administration |
 
-Identifiants MySQL : `root` / `root` — Base : `bd_gsb`
+Identifiants MySQL : `root` / `root` â€” Base : `bd_gsb`
 
 > La base de donnees est automatiquement initialisee avec le dump `dump-bd_gsb-202512101546.sql` au premier demarrage.
 

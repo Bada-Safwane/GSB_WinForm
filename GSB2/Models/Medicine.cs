@@ -1,38 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GSB2.Models
+﻿namespace GSB2.Models
 {
+    // SB: Modèle représentant un médicament
     public class Medicine
     {
+        public int    Id_Medicine  { get; set; }
+        public int    Id_Users     { get; set; }
+        public string Dosage       { get; set; }
+        public string Names        { get; set; }
+        public string Description  { get; set; }
+        public string Molecule     { get; set; }
 
-        // ceci est une propriété permet de lire et d'écrire les attribue de la classe
-        public int Id_Medicine { get; set; }
-        public int Id_Users { get; set; }
-        public string Dosage { get; set; }
-        public string Names { get; set; }
-        public string Description { get; set; }
-        public string Molecule { get; set; }
+        // SB: Constructeur vide utilisé pour l'initialisation via les propriétés
+        public Medicine() { }
 
-
-        // ceci est le constructeur, permet d'accédr aux méthode et propriété de notre class
-        public Medicine()
-        {
-
-        }
-
-        // ceci est une surcharge du constructeur elle permer la création d'un objet user avec les champ passé en param
+        // SB: Constructeur principal utilisé lors de la lecture en base de données
         public Medicine(int id_medicine, int id_users, string dosage, string names, string description, string molecule)
         {
             Id_Medicine = id_medicine;
-            Id_Users = id_users;
-            Dosage = dosage;
-            Names = names;
+            Id_Users    = id_users;
+            Dosage      = dosage;
+            Names       = names;
             Description = description;
-            Molecule = molecule;
+            Molecule    = molecule;
         }
+    }
+
+    // SB: DTO utilisé pour l'affichage des médicaments dans le DataGridView (liaison forte requise pour la génération auto des colonnes)
+    public class MedicineView
+    {
+        public int    Id_medicine  { get; set; }
+        public int    Id_users     { get; set; }
+        public string Dosage       { get; set; }
+        public string Name         { get; set; }
+        public string Description  { get; set; }
+        public string Molecule     { get; set; }
+        public string User         { get; set; }
     }
 }

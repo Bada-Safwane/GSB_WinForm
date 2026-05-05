@@ -21,7 +21,7 @@ namespace GSB2.DAO
                 {
                     connection.Open();
 
-                    string query = "SELECT * FROM Patients WHERE id_patients = @id_patients;";
+                    string query = "SELECT * FROM patients WHERE id_patients = @id_patients;";
                     MySqlCommand cmd = new MySqlCommand(query, connection);
                     cmd.Parameters.AddWithValue("@id_patients", id_patient);
 
@@ -170,7 +170,7 @@ namespace GSB2.DAO
                     connection.Open();
                     string query = @"
                     SELECT id_patients,id_users, name, age, firstname, gender
-                    FROM Patients
+                    FROM patients
                     ORDER BY name, firstname ASC;
                     ";
                     using MySqlCommand cmd = new MySqlCommand(query, connection);

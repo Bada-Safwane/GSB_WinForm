@@ -1,10 +1,7 @@
-﻿using MySql.Data.MySqlClient;
+using MySql.Data.MySqlClient;
 using GSB2.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GSB2.DAO
 {
@@ -12,10 +9,10 @@ namespace GSB2.DAO
     {
         private readonly Database db = new Database();
 
-        // 🔹 Récupérer toutes les associations
+        // SB: Récupère toutes les associations médicament-prescription de la base de données
         public List<LiaiMP> GetAll()
         {
-            List<LiaiMP> list = new List<LiaiMP>();
+            var list = new List<LiaiMP>();
 
             using (var connection = db.GetConnection())
             {
@@ -23,18 +20,18 @@ namespace GSB2.DAO
                 {
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand(
-                        @"SELECT id_prescription, id_medicine, quantity FROM liai_medicine_prescription;", connection);
+                    using var cmd = new MySqlCommand(
+                        @"SELECT id_prescription, id_medicine, quantity
+                          FROM liai_medicine_prescription;", connection);
 
                     using var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        LiaiMP a = new LiaiMP(
+                        list.Add(new LiaiMP(
                             reader.GetInt32("id_medicine"),
                             reader.GetInt32("id_prescription"),
                             reader.IsDBNull(reader.GetOrdinal("quantity")) ? 0 : reader.GetInt32("quantity")
-                        );
-                        list.Add(a);
+                        ));
                     }
                 }
                 catch (Exception ex)
@@ -46,10 +43,10 @@ namespace GSB2.DAO
             return list;
         }
 
-        // 🔹 Récupérer les médicaments d’une prescription
+        // SB: Récupère tous les médicaments associés à une prescription donnée
         public List<LiaiMP> GetByPrescriptionId(int id_prescription)
         {
-            List<LiaiMP> list = new List<LiaiMP>();
+            var list = new List<LiaiMP>();
 
             using (var connection = db.GetConnection())
             {
@@ -57,22 +54,20 @@ namespace GSB2.DAO
                 {
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand(
-                        @"SELECT id_prescription, id_medicine, quantity 
-                          FROM liai_medicine_prescription 
+                    using var cmd = new MySqlCommand(
+                        @"SELECT id_prescription, id_medicine, quantity
+                          FROM liai_medicine_prescription
                           WHERE id_prescription = @id_prescription;", connection);
-
                     cmd.Parameters.AddWithValue("@id_prescription", id_prescription);
 
                     using var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        LiaiMP a = new LiaiMP(
+                        list.Add(new LiaiMP(
                             reader.GetInt32("id_medicine"),
                             reader.GetInt32("id_prescription"),
                             reader.IsDBNull(reader.GetOrdinal("quantity")) ? 0 : reader.GetInt32("quantity")
-                        );
-                        list.Add(a);
+                        ));
                     }
                 }
                 catch (Exception ex)
@@ -84,10 +79,10 @@ namespace GSB2.DAO
             return list;
         }
 
-        // 🔹 Récupérer les prescriptions liées à un médicament
+        // SB: Récupère toutes les prescriptions associées à un médicament donné
         public List<LiaiMP> GetByMedicineId(int id_medicine)
         {
-            List<LiaiMP> list = new List<LiaiMP>();
+            var list = new List<LiaiMP>();
 
             using (var connection = db.GetConnection())
             {
@@ -95,22 +90,20 @@ namespace GSB2.DAO
                 {
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand(
-                        @"SELECT id_prescription, id_medicine, quantity 
-                          FROM liai_medicine_prescription 
+                    using var cmd = new MySqlCommand(
+                        @"SELECT id_prescription, id_medicine, quantity
+                          FROM liai_medicine_prescription
                           WHERE id_medicine = @id_medicine;", connection);
-
                     cmd.Parameters.AddWithValue("@id_medicine", id_medicine);
 
                     using var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        LiaiMP a = new LiaiMP(
+                        list.Add(new LiaiMP(
                             reader.GetInt32("id_medicine"),
                             reader.GetInt32("id_prescription"),
                             reader.IsDBNull(reader.GetOrdinal("quantity")) ? 0 : reader.GetInt32("quantity")
-                        );
-                        list.Add(a);
+                        ));
                     }
                 }
                 catch (Exception ex)
@@ -122,7 +115,7 @@ namespace GSB2.DAO
             return list;
         }
 
-        // 🔹 Ajouter une association
+        // SB: Insère une nouvelle association médicament-prescription en base de données
         public bool Insert(LiaiMP a)
         {
             using (var connection = db.GetConnection())
@@ -131,17 +124,14 @@ namespace GSB2.DAO
                 {
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand(@"
-                        INSERT INTO liai_medicine_prescription (id_prescription, id_medicine, quantity)
-                        VALUES (@id_prescription, @id_medicine, @quantity);
-                    ", connection);
-
+                    using var cmd = new MySqlCommand(
+                        @"INSERT INTO liai_medicine_prescription (id_prescription, id_medicine, quantity)
+                          VALUES (@id_prescription, @id_medicine, @quantity);", connection);
                     cmd.Parameters.AddWithValue("@id_prescription", a.Id_prescription);
-                    cmd.Parameters.AddWithValue("@id_medicine", a.Id_medicine);
-                    cmd.Parameters.AddWithValue("@quantity", a.Quantity);
+                    cmd.Parameters.AddWithValue("@id_medicine",     a.Id_medicine);
+                    cmd.Parameters.AddWithValue("@quantity",        a.Quantity);
 
-                    int rows = cmd.ExecuteNonQuery();
-                    return rows > 0;
+                    return cmd.ExecuteNonQuery() > 0;
                 }
                 catch (Exception ex)
                 {
@@ -151,7 +141,7 @@ namespace GSB2.DAO
             }
         }
 
-        // 🔹 Supprimer une association
+        // SB: Supprime une association médicament-prescription par couple d'identifiants
         public bool Delete(int id_prescription, int id_medicine)
         {
             using (var connection = db.GetConnection())
@@ -160,16 +150,14 @@ namespace GSB2.DAO
                 {
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand(@"
-                        DELETE FROM liai_medicine_prescription
-                        WHERE id_prescription = @id_prescription AND id_medicine = @id_medicine;
-                    ", connection);
-
+                    using var cmd = new MySqlCommand(
+                        @"DELETE FROM liai_medicine_prescription
+                          WHERE id_prescription = @id_prescription
+                            AND id_medicine     = @id_medicine;", connection);
                     cmd.Parameters.AddWithValue("@id_prescription", id_prescription);
-                    cmd.Parameters.AddWithValue("@id_medicine", id_medicine);
+                    cmd.Parameters.AddWithValue("@id_medicine",     id_medicine);
 
-                    int rows = cmd.ExecuteNonQuery();
-                    return rows > 0;
+                    return cmd.ExecuteNonQuery() > 0;
                 }
                 catch (Exception ex)
                 {
@@ -179,7 +167,7 @@ namespace GSB2.DAO
             }
         }
 
-        // 🔹 Supprimer toutes les associations d’une prescription
+        // SB: Supprime toutes les associations médicaments liées à une prescription
         public bool DeleteByPrescriptionId(int id_prescription)
         {
             using (var connection = db.GetConnection())
@@ -188,14 +176,12 @@ namespace GSB2.DAO
                 {
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand(@"
-                        DELETE FROM liai_medicine_prescription WHERE id_prescription = @id_prescription;
-                    ", connection);
-
+                    using var cmd = new MySqlCommand(
+                        @"DELETE FROM liai_medicine_prescription
+                          WHERE id_prescription = @id_prescription;", connection);
                     cmd.Parameters.AddWithValue("@id_prescription", id_prescription);
 
-                    int rows = cmd.ExecuteNonQuery();
-                    return rows > 0;
+                    return cmd.ExecuteNonQuery() > 0;
                 }
                 catch (Exception ex)
                 {
@@ -206,3 +192,4 @@ namespace GSB2.DAO
         }
     }
 }
+

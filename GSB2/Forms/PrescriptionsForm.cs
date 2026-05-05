@@ -64,8 +64,20 @@ namespace GSB2.Forms
         // SB: Charge la liste de toutes les prescriptions dans le DataGridView principal - masque la colonne ID
         private void LoadPrescriptions()
         {
-            dgvPrescriptions.DataSource = prescriptionDAO.GetAllPrescriptions();
-            dgvPrescriptions.Columns["Id"].Visible = false;
+            try
+            {
+                var data = prescriptionDAO.GetAllPrescriptions();
+                dgvPrescriptions.AutoGenerateColumns = true;
+                dgvPrescriptions.DataSource = null;
+                dgvPrescriptions.DataSource = new System.ComponentModel.BindingList<PrescriptionView>(data);
+
+                if (dgvPrescriptions.Columns["Id"] != null)
+                    dgvPrescriptions.Columns["Id"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur lors du chargement des prescriptions : " + ex.Message);
+            }
         }
 
         // SB: Gère le clic sur le bouton Actualiser - recharge la liste des prescriptions depuis la base de données
@@ -95,7 +107,7 @@ namespace GSB2.Forms
             var medList = prescriptionDAO.GetMedicinesWithQuantities(editingPrescriptionId.Value);
             foreach (DataGridViewRow dgvRow in dgvMedicines.Rows)
             {
-                var medId = Convert.ToInt32(dgvRow.Cells["id_medicine"].Value);
+                var medId = Convert.ToInt32(dgvRow.Cells["colId"].Value);
                 var match = medList.FirstOrDefault(m => m.Id_medicine == medId);
                 if (match != default)
                 {

@@ -1,10 +1,7 @@
-﻿using GSB2.Models;
+using GSB2.Models;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GSB2.DAO
 {
@@ -12,16 +9,17 @@ namespace GSB2.DAO
     {
         private readonly Database db = new Database();
 
-        // 🔹 Récupérer une prescription par son ID
+        // SB: Récupère une prescription complète par son identifiant
         public Prescription? GetPrescriptionById(int id_prescription)
         {
             using var connection = db.GetConnection();
             try
             {
                 connection.Open();
-                MySqlCommand cmd = new MySqlCommand(
+
+                var cmd = new MySqlCommand(
                     @"SELECT id_prescription, id_users, id_patients, validity
-                      FROM Prescription 
+                      FROM prescription
                       WHERE id_prescription = @id_prescription;", connection);
                 cmd.Parameters.AddWithValue("@id_prescription", id_prescription);
 
@@ -44,19 +42,20 @@ namespace GSB2.DAO
             }
         }
 
-        // 🔹 Créer une prescription simple
+        // SB: Crée une prescription simple sans médicaments associés
         public bool CreatePrescription(Prescription prescription)
         {
             using var connection = db.GetConnection();
             try
             {
                 connection.Open();
-                MySqlCommand cmd = new MySqlCommand(
-                    @"INSERT INTO Prescription (id_users, id_patient, validity)
-                      VALUES (@id_users, @id_patient, @validity);", connection);
-                cmd.Parameters.AddWithValue("@id_users", prescription.Id_users);
-                cmd.Parameters.AddWithValue("@id_patient", prescription.Id_patients);
-                cmd.Parameters.AddWithValue("@validity", prescription.Validity);
+
+                var cmd = new MySqlCommand(
+                    @"INSERT INTO prescription (id_users, id_patients, validity)
+                      VALUES (@id_users, @id_patients, @validity);", connection);
+                cmd.Parameters.AddWithValue("@id_users",    prescription.Id_users);
+                cmd.Parameters.AddWithValue("@id_patients", prescription.Id_patients);
+                cmd.Parameters.AddWithValue("@validity",    prescription.Validity);
 
                 return cmd.ExecuteNonQuery() > 0;
             }
@@ -67,7 +66,7 @@ namespace GSB2.DAO
             }
         }
 
-        // 🔹 Créer prescription + médicaments/quantités
+        // SB: Crée une prescription et insère en une seule transaction tous les médicaments avec leurs quantités
         public bool CreatePrescriptionWithMedicines(Prescription prescription, List<(int Id_medicine, int Quantity)> medicines)
         {
             using var connection = db.GetConnection();
@@ -78,23 +77,23 @@ namespace GSB2.DAO
                 connection.Open();
                 transaction = connection.BeginTransaction();
 
-                MySqlCommand cmd = new MySqlCommand(
-                    @"INSERT INTO Prescription (id_users, id_patientS, validity)
-                      VALUES (@id_users, @id_patient, @validity);", connection, transaction);
-                cmd.Parameters.AddWithValue("@id_users", prescription.Id_users);
-                cmd.Parameters.AddWithValue("@id_patient", prescription.Id_patients);
-                cmd.Parameters.AddWithValue("@validity", prescription.Validity);
+                var cmd = new MySqlCommand(
+                    @"INSERT INTO prescription (id_users, id_patients, validity)
+                      VALUES (@id_users, @id_patients, @validity);", connection, transaction);
+                cmd.Parameters.AddWithValue("@id_users",    prescription.Id_users);
+                cmd.Parameters.AddWithValue("@id_patients", prescription.Id_patients);
+                cmd.Parameters.AddWithValue("@validity",    prescription.Validity);
                 cmd.ExecuteNonQuery();
                 long newPrescriptionId = cmd.LastInsertedId;
 
                 foreach (var med in medicines)
                 {
-                    MySqlCommand medCmd = new MySqlCommand(
-                        @"INSERT INTO liai_medicine_prescription (id_prescrition, id_medicine, quantity)
+                    var medCmd = new MySqlCommand(
+                        @"INSERT INTO liai_medicine_prescription (id_prescription, id_medicine, quantity)
                           VALUES (@id_prescription, @id_medicine, @quantity);", connection, transaction);
                     medCmd.Parameters.AddWithValue("@id_prescription", newPrescriptionId);
-                    medCmd.Parameters.AddWithValue("@id_medicine", med.Id_medicine);
-                    medCmd.Parameters.AddWithValue("@quantity", med.Quantity);
+                    medCmd.Parameters.AddWithValue("@id_medicine",     med.Id_medicine);
+                    medCmd.Parameters.AddWithValue("@quantity",        med.Quantity);
                     medCmd.ExecuteNonQuery();
                 }
 
@@ -109,50 +108,58 @@ namespace GSB2.DAO
             }
         }
 
-        // 🔹 Récupérer toutes les prescriptions
-        public List<dynamic> GetAllPrescriptions()
+        // SB: Récupère toutes les prescriptions avec les informations patient, médecin et médicaments pour l'affichage
+        public List<PrescriptionView> GetAllPrescriptions()
         {
-            var prescriptions = new List<dynamic>();
+            var prescriptions = new List<PrescriptionView>();
             using var connection = db.GetConnection();
             try
             {
                 connection.Open();
+
                 string query = @"
-                    SELECT 
-                        p.id_prescription, p.validity,
-                        u.firstname AS doctor_firstname, u.name AS doctor_name,
-                        pa.firstname AS patient_firstname, pa.name AS patient_name, pa.age AS patient_age,
+                    SELECT
+                        p.id_prescription,
+                        p.validity,
+                        u.firstname  AS doctor_firstname,
+                        u.name       AS doctor_name,
+                        pa.firstname AS patient_firstname,
+                        pa.name      AS patient_name,
+                        pa.age       AS patient_age,
                         GROUP_CONCAT(CONCAT(m.names, ' (', a.quantity, ')') SEPARATOR ', ') AS medicines
-                    FROM Prescription p
-                    INNER JOIN Users u ON p.id_users = u.id_users
-                    INNER JOIN Patients pa ON p.id_patients = pa.id_patients
-                    LEFT JOIN liai_medicine_prescription a ON p.id_prescription = a.id_prescrition
-                    LEFT JOIN Medicine m ON a.id_medicine = m.id_medicine
+                    FROM prescription p
+                    LEFT JOIN users    u  ON p.id_users    = u.id_users
+                    LEFT JOIN patients pa ON p.id_patients = pa.id_patients
+                    LEFT JOIN liai_medicine_prescription a ON p.id_prescription = a.id_prescription
+                    LEFT JOIN medicine m ON a.id_medicine = m.id_medicine
                     GROUP BY p.id_prescription, p.validity, u.firstname, u.name, pa.firstname, pa.name, pa.age
                     ORDER BY p.id_prescription ASC;";
 
-                using var cmd = new MySqlCommand(query, connection);
+                using var cmd    = new MySqlCommand(query, connection);
                 using var reader = cmd.ExecuteReader();
+
                 while (reader.Read())
                 {
-                    prescriptions.Add(new
+                    prescriptions.Add(new PrescriptionView
                     {
-                        Id = reader.GetInt32("id_prescription"),
-                        Validité = reader.GetDateTime("validity").ToString("yyyy-MM-dd"),
-                        Docteur = $"{reader["doctor_firstname"]} {reader["doctor_name"]}",
-                        Patient = $"{reader["patient_firstname"]} {reader["patient_name"]} ({reader["patient_age"]} ans)",
-                        Médicaments = reader["medicines"] != DBNull.Value ? reader["medicines"].ToString() : "Aucun"
+                        Id          = reader.GetInt32("id_prescription"),
+                        Validite    = reader.GetDateTime("validity").ToString("yyyy-MM-dd"),
+                        Docteur     = $"{reader["doctor_firstname"]} {reader["doctor_name"]}",
+                        Patient     = $"{reader["patient_firstname"]} {reader["patient_name"]} ({reader["patient_age"]} ans)",
+                        Medicaments = reader["medicines"] != DBNull.Value ? reader["medicines"].ToString() : "Aucun"
                     });
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Erreur GetAllPrescriptions : " + ex.Message);
+                throw;
             }
+
             return prescriptions;
         }
 
-        // 🔹 Récupérer médicaments + quantités d'une prescription
+        // SB: Récupère la liste des médicaments et leurs quantités pour une prescription donnée
         public List<(int Id_medicine, int Quantity)> GetMedicinesWithQuantities(int id_prescription)
         {
             var list = new List<(int, int)>();
@@ -160,9 +167,13 @@ namespace GSB2.DAO
             try
             {
                 connection.Open();
-                string query = @"SELECT id_medicine, quantity FROM liai_medicine_prescription WHERE id_prescrition = @id";
+
+                string query = @"SELECT id_medicine, quantity
+                                 FROM liai_medicine_prescription
+                                 WHERE id_prescription = @id;";
                 using var cmd = new MySqlCommand(query, connection);
                 cmd.Parameters.AddWithValue("@id", id_prescription);
+
                 using var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -173,10 +184,11 @@ namespace GSB2.DAO
             {
                 Console.WriteLine("Erreur GetMedicinesWithQuantities : " + ex.Message);
             }
+
             return list;
         }
 
-        // 🔹 Modifier prescription (date + médicaments/quantités)
+        // SB: Met à jour la date de validité d'une prescription et remplace tous ses médicaments en une seule transaction
         public bool UpdatePrescription(int id_prescription, string newValidity, List<(int Id_medicine, int Quantity)> medicines)
         {
             using var connection = db.GetConnection();
@@ -187,28 +199,30 @@ namespace GSB2.DAO
                 connection.Open();
                 transaction = connection.BeginTransaction();
 
-                // 1️⃣ Update date
-                MySqlCommand cmd = new MySqlCommand(
-                    @"UPDATE Prescription SET validity = @validity WHERE id_prescription = @id;", connection, transaction);
+                // SB: Mise à jour de la date
+                var cmd = new MySqlCommand(
+                    @"UPDATE prescription SET validity = @validity WHERE id_prescription = @id;",
+                    connection, transaction);
                 cmd.Parameters.AddWithValue("@validity", newValidity);
-                cmd.Parameters.AddWithValue("@id", id_prescription);
+                cmd.Parameters.AddWithValue("@id",       id_prescription);
                 cmd.ExecuteNonQuery();
 
-                // 2️⃣ Supprimer anciennes lignes Appartient
-                MySqlCommand delCmd = new MySqlCommand(
-                    @"DELETE FROM liai_medicine_prescription WHERE id_prescription = @id;", connection, transaction);
+                // SB: Suppression des anciens médicaments
+                var delCmd = new MySqlCommand(
+                    @"DELETE FROM liai_medicine_prescription WHERE id_prescription = @id;",
+                    connection, transaction);
                 delCmd.Parameters.AddWithValue("@id", id_prescription);
                 delCmd.ExecuteNonQuery();
 
-                // 3️⃣ Ré-inserer nouvelles quantités
+                // SB: Insertion des nouveaux médicaments avec quantités
                 foreach (var med in medicines)
                 {
-                    MySqlCommand medCmd = new MySqlCommand(
+                    var medCmd = new MySqlCommand(
                         @"INSERT INTO liai_medicine_prescription (id_prescription, id_medicine, quantity)
                           VALUES (@id_prescription, @id_medicine, @quantity);", connection, transaction);
                     medCmd.Parameters.AddWithValue("@id_prescription", id_prescription);
-                    medCmd.Parameters.AddWithValue("@id_medicine", med.Id_medicine);
-                    medCmd.Parameters.AddWithValue("@quantity", med.Quantity);
+                    medCmd.Parameters.AddWithValue("@id_medicine",     med.Id_medicine);
+                    medCmd.Parameters.AddWithValue("@quantity",        med.Quantity);
                     medCmd.ExecuteNonQuery();
                 }
 
@@ -223,7 +237,7 @@ namespace GSB2.DAO
             }
         }
 
-        // 🔹 Supprimer une prescription
+        // SB: Supprime une prescription et toutes ses liaisons médicaments en une seule transaction
         public bool DeletePrescription(int id_prescription)
         {
             using var connection = db.GetConnection();
@@ -234,15 +248,17 @@ namespace GSB2.DAO
                 connection.Open();
                 transaction = connection.BeginTransaction();
 
-                // 1️⃣ Supprimer lignes Appartient
-                MySqlCommand delAppCmd = new MySqlCommand(
-                    @"DELETE FROM liai_medicine_prescription WHERE id_prescription = @id;", connection, transaction);
+                // SB: Suppression des liaisons médicaments
+                var delAppCmd = new MySqlCommand(
+                    @"DELETE FROM liai_medicine_prescription WHERE id_prescription = @id;",
+                    connection, transaction);
                 delAppCmd.Parameters.AddWithValue("@id", id_prescription);
                 delAppCmd.ExecuteNonQuery();
 
-                // 2️⃣ Supprimer prescription
-                MySqlCommand delPrescCmd = new MySqlCommand(
-                    @"DELETE FROM Prescription WHERE id_prescription = @id;", connection, transaction);
+                // SB: Suppression de la prescription
+                var delPrescCmd = new MySqlCommand(
+                    @"DELETE FROM prescription WHERE id_prescription = @id;",
+                    connection, transaction);
                 delPrescCmd.Parameters.AddWithValue("@id", id_prescription);
                 delPrescCmd.ExecuteNonQuery();
 

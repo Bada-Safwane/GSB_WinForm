@@ -1,4 +1,4 @@
-﻿using GSB2;
+using GSB2;
 using GSB2.Models;
 using MySql.Data.MySqlClient;
 using System;
@@ -10,10 +10,10 @@ namespace GSB2.DAO
     {
         private readonly Database db = new Database();
 
-        // 🔹 Récupérer toutes les medicines avec leur utilisateur associé
-        public List<dynamic> GetAll()
+        // SB: Récupère tous les médicaments avec les informations de l'utilisateur qui les a créés
+        public List<MedicineView> GetAll()
         {
-            var medicines = new List<dynamic>();
+            var medicines = new List<MedicineView>();
 
             using (var connection = db.GetConnection())
             {
@@ -22,64 +22,67 @@ namespace GSB2.DAO
                     connection.Open();
 
                     string query = @"
-	                SELECT
-                    m.id_medicine,
-                    m.id_users,
-                    m.dosage,
-                    m.names AS medicine_name,
-                    m.description,
-                    m.molecule,
-                    u.firstname AS user_firstname,
-                    u.name AS user_name
-                    FROM Medicine m
-                    INNER JOIN users u ON m.id_users = u.id_users;
-            ";
+                        SELECT
+                            m.id_medicine,
+                            m.id_users,
+                            m.dosage,
+                            m.names       AS medicine_name,
+                            m.description,
+                            m.molecule,
+                            u.firstname   AS user_firstname,
+                            u.name        AS user_name
+                        FROM medicine m
+                        LEFT JOIN users u ON m.id_users = u.id_users;";
 
-                    using var cmd = new MySqlCommand(query, connection);
+                    using var cmd    = new MySqlCommand(query, connection);
                     using var reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        medicines.Add(new
+                        medicines.Add(new MedicineView
                         {
                             Id_medicine = reader.GetInt32("id_medicine"),
-                            Id_users = reader.GetInt32("id_users"),
-                            Dosage = reader["dosage"].ToString(),
-                            Name = reader["medicine_name"].ToString(),
-                            Description = reader["description"].ToString(),
-                            Molecule = reader["molecule"].ToString(),
-                            User = $"{reader["user_firstname"]} {reader["user_name"]}" // Résolution de l'utilisateur
+                            Id_users    = reader.IsDBNull(reader.GetOrdinal("id_users")) ? 0 : reader.GetInt32("id_users"),
+                            Dosage      = reader["dosage"]?.ToString()       ?? "",
+                            Name        = reader["medicine_name"]?.ToString() ?? "",
+                            Description = reader["description"]?.ToString()   ?? "",
+                            Molecule    = reader["molecule"]?.ToString()       ?? "",
+                            User        = $"{reader["user_firstname"]} {reader["user_name"]}".Trim()
                         });
                     }
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Erreur lors de la récupération des médicaments : {ex.Message}");
+                    throw;
                 }
             }
 
             return medicines;
         }
 
+        // SB: Récupère uniquement l'ID et le nom de tous les médicaments, utilisé pour les listes déroulantes
         public List<Medicine> GetAllMedicines()
         {
-            List<Medicine> medicines = new List<Medicine>();
+            var medicines = new List<Medicine>();
 
             using (var connection = db.GetConnection())
             {
                 try
                 {
                     connection.Open();
-                    string query = "SELECT id_medicine, names FROM Medicine ORDER BY names;";
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    string query = "SELECT id_medicine, names, dosage FROM medicine ORDER BY names;";
 
+                    using var cmd    = new MySqlCommand(query, connection);
                     using var reader = cmd.ExecuteReader();
+
                     while (reader.Read())
                     {
                         medicines.Add(new Medicine
                         {
                             Id_Medicine = reader.GetInt32("id_medicine"),
-                            Names = reader.GetString("names")
+                            Names       = reader.GetString("names"),
+                            Dosage      = reader.GetString("dosage")
                         });
                     }
                 }
@@ -92,8 +95,7 @@ namespace GSB2.DAO
             return medicines;
         }
 
-
-        // 🔹 Récupérer un médicament par ID
+        // SB: Récupère un médicament complet par son identifiant, avec les informations du créateur
         public Medicine? GetById(int id)
         {
             Medicine? med = null;
@@ -104,47 +106,38 @@ namespace GSB2.DAO
                 {
                     connection.Open();
 
-                    MySqlCommand myCommand = new MySqlCommand(@"
-                SELECT 
-                    m.id_medicine,
-                    m.id_users,
-                    m.dosage,
-                    m.names AS medicine_name,
-                    m.description,
-                    m.molecule,
-                    u.name AS user_name,
-                    u.firstname AS user_firstname
-                FROM Medicine m
-                INNER JOIN Users u ON m.id_users = u.id_users
-                WHERE m.id_medicine = @id;
-            ", connection);
+                    string query = @"
+                        SELECT
+                            m.id_medicine,
+                            m.id_users,
+                            m.dosage,
+                            m.names       AS medicine_name,
+                            m.description,
+                            m.molecule,
+                            u.name        AS user_name,
+                            u.firstname   AS user_firstname
+                        FROM medicine m
+                        LEFT JOIN users u ON m.id_users = u.id_users
+                        WHERE m.id_medicine = @id;";
 
-                    myCommand.Parameters.AddWithValue("@id", id);
+                    using var cmd = new MySqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@id", id);
 
-                    using var myReader = myCommand.ExecuteReader();
-                    if (myReader.Read())
+                    using var reader = cmd.ExecuteReader();
+                    if (reader.Read())
                     {
-                        // Lecture sécurisée (évite tous les NULL)
-                        string dosage = myReader["dosage"]?.ToString() ?? "";
-                        string name = myReader["medicine_name"]?.ToString() ?? "";
-                        string description = myReader["description"]?.ToString() ?? "";
-                        string molecule = myReader["molecule"]?.ToString() ?? "";
-
                         med = new Medicine(
-                            myReader.GetInt32("id_medicine"),
-                            myReader.GetInt32("id_users"),
-                            dosage,
-                            name,
-                            description,
-                            molecule
+                            reader.GetInt32("id_medicine"),
+                            reader.IsDBNull(reader.GetOrdinal("id_users")) ? 0 : reader.GetInt32("id_users"),
+                            reader["dosage"]?.ToString()        ?? "",
+                            reader["medicine_name"]?.ToString() ?? "",
+                            reader["description"]?.ToString()   ?? "",
+                            reader["molecule"]?.ToString()      ?? ""
                         );
 
-                        // Ajout des infos du créateur (safe également)
-                        string userFirst = myReader["user_firstname"]?.ToString() ?? "";
-                        string userName = myReader["user_name"]?.ToString() ?? "";
-
-                        med.Description = (med.Description ?? "") +
-                                          $" (Ajouté par {userFirst} {userName})";
+                        string userFirst = reader["user_firstname"]?.ToString() ?? "";
+                        string userName  = reader["user_name"]?.ToString()      ?? "";
+                        med.Description += $" (Ajouté par {userFirst} {userName})";
                     }
                 }
                 catch (Exception ex)
@@ -156,8 +149,7 @@ namespace GSB2.DAO
             return med;
         }
 
-
-        // 🔹 Ajouter un médicament
+        // SB: Insère un nouveau médicament en base de données
         public bool Insert(Medicine med)
         {
             using (var connection = db.GetConnection())
@@ -166,21 +158,18 @@ namespace GSB2.DAO
                 {
                     connection.Open();
 
-                    MySqlCommand myCommand = new MySqlCommand(@"
-                        INSERT INTO Medicine (id_users, dosage, names, description, molecule)
-                        VALUES (@id_users, @dosage, @names, @description, @molecule);
-                    ", connection);
+                    string query = @"
+                        INSERT INTO medicine (id_users, dosage, names, description, molecule)
+                        VALUES (@id_users, @dosage, @names, @description, @molecule);";
 
-                    myCommand.Parameters.AddWithValue("@id_users", med.Id_Users);
-                    myCommand.Parameters.AddWithValue("@dosage", med.Dosage);
-                    myCommand.Parameters.AddWithValue("@names", med.Names);
-                    myCommand.Parameters.AddWithValue("@description", med.Description);
-                    myCommand.Parameters.AddWithValue("@molecule", med.Molecule);
+                    using var cmd = new MySqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@id_users",     med.Id_Users);
+                    cmd.Parameters.AddWithValue("@dosage",       med.Dosage);
+                    cmd.Parameters.AddWithValue("@names",        med.Names);
+                    cmd.Parameters.AddWithValue("@description",  med.Description);
+                    cmd.Parameters.AddWithValue("@molecule",     med.Molecule);
 
-                    int rows = myCommand.ExecuteNonQuery();
-                    connection.Close();
-
-                    return rows > 0;
+                    return cmd.ExecuteNonQuery() > 0;
                 }
                 catch (Exception ex)
                 {
@@ -190,7 +179,7 @@ namespace GSB2.DAO
             }
         }
 
-        // 🔹 Mettre à jour un médicament
+        // SB: Met à jour les informations d'un médicament existant
         public bool Update(Medicine med)
         {
             using (var connection = db.GetConnection())
@@ -199,27 +188,24 @@ namespace GSB2.DAO
                 {
                     connection.Open();
 
-                    MySqlCommand myCommand = new MySqlCommand(@"
-                        UPDATE Medicine
-                        SET id_users = @id_users,
-                            dosage = @dosage,
-                            names = @names,
+                    string query = @"
+                        UPDATE medicine
+                        SET id_users    = @id_users,
+                            dosage      = @dosage,
+                            names       = @names,
                             description = @description,
-                            molecule = @molecule
-                        WHERE id_medicine = @id_medicine;
-                    ", connection);
+                            molecule    = @molecule
+                        WHERE id_medicine = @id_medicine;";
 
-                    myCommand.Parameters.AddWithValue("@id_medicine", med.Id_Medicine);
-                    myCommand.Parameters.AddWithValue("@id_users", med.Id_Users);
-                    myCommand.Parameters.AddWithValue("@dosage", med.Dosage);
-                    myCommand.Parameters.AddWithValue("@name", med.Names);
-                    myCommand.Parameters.AddWithValue("@description", med.Description);
-                    myCommand.Parameters.AddWithValue("@molecule", med.Molecule);
+                    using var cmd = new MySqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@id_medicine",  med.Id_Medicine);
+                    cmd.Parameters.AddWithValue("@id_users",     med.Id_Users);
+                    cmd.Parameters.AddWithValue("@dosage",       med.Dosage);
+                    cmd.Parameters.AddWithValue("@names",        med.Names);
+                    cmd.Parameters.AddWithValue("@description",  med.Description);
+                    cmd.Parameters.AddWithValue("@molecule",     med.Molecule);
 
-                    int rows = myCommand.ExecuteNonQuery();
-                    connection.Close();
-
-                    return rows > 0;
+                    return cmd.ExecuteNonQuery() > 0;
                 }
                 catch (Exception ex)
                 {
@@ -229,7 +215,7 @@ namespace GSB2.DAO
             }
         }
 
-        // 🔹 Supprimer un médicament
+        // SB: Supprime un médicament de la base de données par son identifiant
         public bool Delete(int id)
         {
             using (var connection = db.GetConnection())
@@ -238,14 +224,11 @@ namespace GSB2.DAO
                 {
                     connection.Open();
 
-                    MySqlCommand myCommand = new MySqlCommand(
-                        "DELETE FROM Medicine WHERE id_medicine = @id;", connection);
-                    myCommand.Parameters.AddWithValue("@id", id);
+                    using var cmd = new MySqlCommand(
+                        "DELETE FROM medicine WHERE id_medicine = @id;", connection);
+                    cmd.Parameters.AddWithValue("@id", id);
 
-                    int rows = myCommand.ExecuteNonQuery();
-                    connection.Close();
-
-                    return rows > 0;
+                    return cmd.ExecuteNonQuery() > 0;
                 }
                 catch (Exception ex)
                 {

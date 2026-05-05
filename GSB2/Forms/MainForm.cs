@@ -44,10 +44,14 @@ namespace GSB2.Forms
         // SB: Charge la liste de tous les utilisateurs dans le DataGridView - visible uniquement pour les administrateurs
         private void dvgUsersLoadContent()
         {
+            // SB: Affiche ou masque toute l'interface de gestion des utilisateurs selon le rôle
+            dgvUsers.Visible    = connectedUser.Role;
+            gbModifyUser.Visible = connectedUser.Role;
+            btnNewUser.Visible   = connectedUser.Role;
+
             if (connectedUser.Role)
             {
                 var Users = new UserDAO();
-                dgvUsers.Visible = true;
                 dgvUsers.AutoGenerateColumns = true;
                 dgvUsers.DataSource = Users.GetAllUsers();
 
@@ -57,10 +61,10 @@ namespace GSB2.Forms
                 if (dgvUsers.Columns["Password"] != null)
                     dgvUsers.Columns["Password"].Visible = false;
 
-                dgvUsers.Columns["Name"].HeaderText = "Nom";
+                dgvUsers.Columns["Name"].HeaderText      = "Nom";
                 dgvUsers.Columns["FirstName"].HeaderText = "Prénom";
-                dgvUsers.Columns["Email"].HeaderText = "E-mail";
-                dgvUsers.Columns["Role"].HeaderText = "Administrateur ?";
+                dgvUsers.Columns["Email"].HeaderText     = "E-mail";
+                dgvUsers.Columns["Role"].HeaderText      = "Administrateur ?";
             }
         }
 

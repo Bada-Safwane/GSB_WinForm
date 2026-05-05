@@ -39,10 +39,11 @@ namespace GSB2.Forms
             pnlFormRight = new Panel();
             labelMedicines = new Label();
             dgvMedicines = new DataGridView();
-            dataGridViewCheckBoxColumn1 = new DataGridViewCheckBoxColumn();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            colSelect = new DataGridViewCheckBoxColumn();
+            colId = new DataGridViewTextBoxColumn();
+            colName = new DataGridViewTextBoxColumn();
+            colDosage = new DataGridViewTextBoxColumn();
+            colQuantity = new DataGridViewTextBoxColumn();
             BtnSave = new Button();
             pnlSidebar.SuspendLayout();
             pnlHeader.SuspendLayout();
@@ -352,7 +353,7 @@ namespace GSB2.Forms
             dgvMedicines.BackgroundColor = Color.White;
             dgvMedicines.ColumnHeadersHeight = 30;
             dgvMedicines.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvMedicines.Columns.AddRange(new DataGridViewColumn[] { dataGridViewCheckBoxColumn1, dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3 });
+            dgvMedicines.Columns.AddRange(new DataGridViewColumn[] { colSelect, colId, colName, colDosage, colQuantity });
             dgvMedicines.Location = new Point(0, 42);
             dgvMedicines.Margin = new Padding(4, 5, 4, 5);
             dgvMedicines.Name = "dgvMedicines";
@@ -362,25 +363,37 @@ namespace GSB2.Forms
             dgvMedicines.Size = new Size(643, 208);
             dgvMedicines.TabIndex = 1;
             // 
-            // dataGridViewCheckBoxColumn1
+            // colSelect
             // 
-            dataGridViewCheckBoxColumn1.MinimumWidth = 8;
-            dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            colSelect.HeaderText = "";
+            colSelect.MinimumWidth = 8;
+            colSelect.Name = "colSelect";
+            colSelect.Width = 40;
             // 
-            // dataGridViewTextBoxColumn1
+            // colId
             // 
-            dataGridViewTextBoxColumn1.MinimumWidth = 8;
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            colId.HeaderText = "Id";
+            colId.MinimumWidth = 8;
+            colId.Name = "colId";
+            colId.Visible = false;
             // 
-            // dataGridViewTextBoxColumn2
+            // colName
             // 
-            dataGridViewTextBoxColumn2.MinimumWidth = 8;
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            colName.HeaderText = "Nom";
+            colName.MinimumWidth = 8;
+            colName.Name = "colName";
             // 
-            // dataGridViewTextBoxColumn3
+            // colDosage
             // 
-            dataGridViewTextBoxColumn3.MinimumWidth = 8;
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            colDosage.HeaderText = "Dosage";
+            colDosage.MinimumWidth = 8;
+            colDosage.Name = "colDosage";
+            // 
+            // colQuantity
+            // 
+            colQuantity.HeaderText = "Quantité";
+            colQuantity.MinimumWidth = 8;
+            colQuantity.Name = "colQuantity";
             // 
             // BtnSave
             // 
@@ -455,9 +468,10 @@ namespace GSB2.Forms
         private Label labelMedicines;
         private DataGridView dgvMedicines;
         private Button BtnSave;
-        private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private DataGridViewCheckBoxColumn colSelect;
+        private DataGridViewTextBoxColumn colId;
+        private DataGridViewTextBoxColumn colName;
+        private DataGridViewTextBoxColumn colDosage;
+        private DataGridViewTextBoxColumn colQuantity;
     }
 }
